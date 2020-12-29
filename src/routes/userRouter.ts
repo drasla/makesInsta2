@@ -224,3 +224,80 @@ UserRouter.get("/edit", Auth, WrapHandler(async (req, res) => {
         "email": userInformation.email
     })
 }));
+
+UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const {name, comment, email} = req.body;
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    if(!name || !comment || !email) {
+        res.render("user/edit", {
+            "username": req.userinfo.username,
+            "name": userInformation.name,
+            "comment": userInformation.comment,
+            "picture": userInformation.picture,
+            "email": userInformation.email,
+            Msg: ErrorMsg.NotInputValue
+        });
+    }
+
+    const update = await SequelizeUtil.db.transaction<{
+        isUpdate: boolean,
+        msg?: string
+    }>(async t => {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: req.userinfo.username
+            },
+            transaction: t
+        });
+
+        if (!user) {
+            return {
+                isUpdate: false,
+                msg: "회원 정보가 없습니다. 다시 시도해주세요."
+            };
+        }
+
+        const findEmail = await UserInfo.findAll<UserInfo>({
+            where: {
+                email: email
+            },
+            transaction: t
+        })
+
+        if(1 < findEmail.length) {
+            return {
+                isUpdate: false,
+                msg: ErrorMsg.FoundEmail
+            }
+        }
+
+        await UserInfo.update({
+                nm: name,
+                email: email,
+                comment: comment
+            },
+            {
+                where: {
+                    userId: user.userInfoId
+                },
+                transaction: t
+            });
+
+        return {
+            isUpdate: true,
+            msg: ErrorMsg.EditUpdateOK
+        };
+    });
+
+    res.render("user/result", {
+        "username": req.userinfo.username,
+        "picture": userInformation.picture,
+        "Msg": update.msg
+    });
+}))

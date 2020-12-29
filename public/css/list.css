@@ -19,6 +19,14 @@ header {
     boorder-bottom: 1px solid #000000;
 }
 
+.alert {
+    color: #8c8c8c;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+}
+
+
 div.blank {
     flex-basis: 54px;
     -webkit-flex-basis: 54px;
@@ -97,7 +105,7 @@ div.button_array {
 }
 
 div.button {
-    width: 30px;
+    width: 64px;
     align-items: stretch;
     border: 0 solid #000000;
     box-sizing: border-box;
