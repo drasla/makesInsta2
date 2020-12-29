@@ -1,0 +1,853 @@
+body {
+    height: 100%;
+}
+
+header {
+    order: 0;
+    background-color: #fafafa;
+    padding: 0;
+    border: 0 solid #000000;
+    align-tems: strech;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    boorder-bottom: 1px solid #000000;
+}
+
+div.blank {
+    flex-basis: 54px;
+    -webkit-flex-basis: 54px;
+    box-sizing: border-box;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    border-bottom: 3px solid #000000;
+    width: 100%;
+}
+
+div.header {
+    -webkit-box-align: center;
+    align-items: center;
+    height: 54px;
+    background-color: #ffffff;
+    border-bottom: #dbdbdb;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+    display: flex;
+}
+div.header_detail {
+    height: 54px;
+    padding: 0 20px;
+    -webkit-box-align: center;
+    align-items: center;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-direction: row;
+    -webkit-box-pack: center;
+    justify-content: center;
+    max-width: 975px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+div.logo a {
+    color: #000000;
+    font-size: 27px;
+    flex: 1 9999 0%;
+    min-width: 40px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    font-family: 'Dancing Script', cursive;
+}
+
+div.action {
+    align-content: center;
+    align-items: center;
+    display: flex;
+    flex: 1 0 0;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+
+div.button_array {
+    display: flex;
+    flex-direction: row;
+    padding-left: 24px;
+    white-space: nowrap;
+}
+
+div.button {
+    width: 30px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    white-space: nowrap;
+
+}
+
+div.button > div.mypic {
+    border: 1px solid #262626;
+    border-radius: 50%;
+    height: 28px;
+    position: absolute;
+    width: 28px;
+    top: -3px;
+    box-sizing: border-box;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    vertical-align: baseline;
+}
+
+span.mypic {
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    box-sizing: border-box;
+    display:block;
+    flex: 0 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+span.mypic > img {
+    width: 22px;
+    height: 22px;
+}
+
+header div.line {
+    width:100%; height: 0px; border-bottom: 1px solid #dcdcdc; position: relative;
+}
+
+main {
+    background-color: #fafafa;
+    flex-grow: 1;
+    order: 4;
+    display: flex;
+    align-items: stretch;
+    border: 0 solid #000000;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+section.full_list {
+    align-item: stretch;
+    box-sizing: border-box;
+    padding-top: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    max-width: 935px;
+    flex-grow: 1;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+}
+
+section.full_list > div.full_left {
+    float: left;
+    margin-right: 28px;
+    max-width: 614px;
+    width: 100%;
+    align-items: stretch;
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+}
+
+section.full_list div.full_left > div.content {
+    flex-direction: column;
+    padding-top: 0px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+article.content {
+    padding: 0;
+    margin-bottom: 60px;
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+    background-color: #ffffff;
+}
+
+article header {
+    height: 60px;
+    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid #efefef;
+    display: flex;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    background-color: #ffffff;
+}
+
+div.uploader_pic {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    align-items: stretch;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+div.uploader_button > a {
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: block;
+    flex: 0 0 auto;
+    overflow: hidden;
+    position: relative;
+}
+
+a > img {  width: 32px; height: 32px; }
+
+div.uploader_name {
+    margin-left: 14px;
+    align-items: flex-start;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+a.uploader_name {
+    color: #262626;
+    display: inline;
+    padding: 0;
+    position: relative;
+    font-size: 16px;
+
+}
+
+div.button_like {
+    margin-top: 4px;
+}
+
+div.upload_pic {
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    width: 100%;
+}
+
+footer {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    position: relative;
+}
+
+footer > div.latest_comment {
+    padding-left: 16px;
+    padding-right: 16px;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+footer > div.latest_comment > div.latest_commenter {
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 8px;
+    flex-direction: row;
+    display: flex;
+    position: relative;
+}
+
+footer > div.latest_comment > div.latest_commenter > div.latest_commenter_pic {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    align-items: stretch;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+footer > div.latest_comment > div.latest_commenter > div.latest_commenter_pic > a {
+    margin-top: 16px;
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    border-radius: 50%;
+    background-color: #ffffff;
+    display: block;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+}
+
+footer > div.latest_comment > div.latest_commenter > div.latest_commenter_pic > a > img {
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+footer > div.latest_comment > div.latest_commenter > div.latest_commenter_name {
+    top: 11px;
+    left: -4px;
+    align-items: flex-start;
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+footer > div.content {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 8px;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    position: relative;
+    width: 100%;
+}
+
+footer > div.content > div.uploader_name > span.name {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+footer > div.comment {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 5px;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    position: relative;
+    width: 100%;
+    flex-direction: column;
+}
+
+footer > div.comment > div.countComment {
+    margin-left: 16px;
+    margin-right: 16px;
+    margin-bottom: 6px;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    position: relative;
+}
+
+footer > div.comment > div.comment_name {
+    margin-left: 16px;
+    margin-right: 16px;
+    flex: 0 0 auto;
+    justify-content: flex-start;
+    flex-grow: 1;
+    overflow: auto;
+    display: flex;
+    position: relative;
+}
+
+footer > div.comment > div.comment_name > span.name {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+footer > div.time {
+    text-align: left;
+    padding-left: 16px;
+    margin-bottom: 10px;
+    color: #8c8c8c;
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: .2px;
+    line-height: 18px;
+    width: 100%;
+}
+
+section.full_list > div.side {
+    height: 0;
+    max-width: 293px;
+    position: absolute;
+    right:0;
+    width: 100%;
+}
+section.full_list > div.full_right {
+    float: left;
+    align-items: stretch;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    max-width: 293px;
+    width: 100%;
+}
+
+section.full_list > div.full_right > div.menu {
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+section.full_list > div.full_right > div.menu > div.mymenu {
+    height: 60px;
+    padding: 16px;
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    align-items: stretch;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    width: 100%;
+    flex-grow: 1;
+    border-bottom: 1px solid #dbdbdb;
+}
+
+section.full_list > div.full_right > div.menu > div.mymenu > a {
+    color: #000000;
+}
+
+section.full_list > div.full_right > div.menu > div.mymenu_bottom {
+    text-decoration: none;
+    height: 60px;
+    padding: 16px;
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    align-items: stretch;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    width: 100%;
+    flex-grow: 1;
+}
+
+section.full_list > div.full_right > div.menu > div.mymenu_bottom > a {
+    color: #000000;
+}
+
+
+section.my_list {
+    background-color: #fafafa;
+    flex-grow: 1;
+    order: 4;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    max-width: 975px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+
+section.my_list > header {
+    padding: 30px 20px 50px 20px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    position: relative;
+}
+
+section.my_list > header > div.mypic {
+    flex-basis: 0;
+    flex-grow: 1;
+    margin-right: 30px;
+    flex-shrink: 0;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    position: relative;
+}
+
+section.my_list > header > div.mypic > div.mypic_inner {
+    align-items: stretch;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    width: 148px;
+    height: 148px;
+    border: 0px solid #000000;
+    border-radius: 50%;
+}
+
+section.my_list > header > div.mypic > div.mypic_inner > a {
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    width: 150px;
+    height: 150px;
+}
+
+section.my_list > header > div.mypic > div.mypic_inner > a > img {
+    width: 150px;
+    height: 150px;
+}
+
+section.my_list > header > div.myinfo {
+    flex-basis: 30px;
+    flex-grow: 2;
+    flex-shrink: 1;
+    min-width: 0;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+section.my_list > header > div.myinfo > div.myinfo_name {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    align-items: center;
+    flex-direction: row;
+    flex-shrink: 1;
+    min-width: 0;
+    display: flex;
+}
+
+section.my_list > header > div.myinfo > div.myinfo_name > h2 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+section.my_list > header > div.myinfo > div.myinfo_count {
+    margin-bottom: 20px;
+    align-items: center;
+    flex-direction: row;
+    flex-shrink: 1;
+    min-width: 0;
+    display: flex;
+}
+
+section.my_list > header > div.myinfo > div.myinfo_count > h3 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+section.my_list > header > div.myinfo > div.myinfo_info > h3 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 32px;
+    margin: -5px 0 -6px;
+    padding: 0;
+    border: 0;
+    vertical-align: baseline;
+}
+
+section.my_list > div.content {
+    flex-grow: 1;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+    position: relative;
+    max-width: 935px;
+    width: 100%;
+}
+
+section.my_list > div.content > div.third {
+    flex-direction: row;
+    margin-bottom: 28px;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    padding: 0px;
+    position: relative;
+}
+
+section.my_list > div.content > div.third > article.item {
+    flex: 1 0 0;
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-right: 28px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    flex-direction: column;
+    padding: 0;
+}
+
+section.my_list > div.content > div.third > article.item > a > img {
+    width: 100%;
+    height: 100%;
+}
+
+section.my_list > div.content > div.third > article.item_end {
+    flex: 1 0 0;
+    display: block;
+    position: relative;
+    width: 100%;
+    margin-right: 0px;
+    align-items: stretch;
+    border: 0 solid #000000;
+    flex-direction: column;
+    padding: 0;
+}
+
+section.my_list > div.content > div.third > article.item_end > a > img {
+    width: 100%;
+    height: 100%;
+}
+
+div.full_left > div.content > div.edit {
+    padding-top: 0px;
+    align-items: stretch;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0;
+    position: relative;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic {
+    margin: 50px 32px 0 124px;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic > div.pic {
+    border-radius: 50%;
+    background-color: #fafafa;
+    width: 38px;
+    height: 38px;
+    overflow: hidden;
+    position: relative;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic > div.pic > img {
+    width: 38px;
+    height: 38px;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic > div.item_detail {
+    margin-left: 30px;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic > div.item_detail > h1 {
+    font-size: 19px;
+    line-height: 20px;
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+div.full_left > div.content > div.edit > form > div.item {
+    flex-direction: row;
+    margin: 32px 0 0;
+    justify-content: flex-start;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+}
+
+div.full_left > div.content > div.edit > form > div.item > aside {
+    padding-left: 32px;
+    padding-right: 32px;
+    text-align: right;
+    box-sizing: border-box;
+    flex: 0 0 194px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-top: 5px;
+}
+
+div.full_left > div.content > div.edit > form > div.item > div.item_detail {
+    flex-basis: 355px;
+    flex-direction: row;
+    padding-right: 60px;
+    flex-grow: 1;
+    font-size: 16px;
+    justify-content: flex-start;
+    display: flex;
+    margin: 0;
+    position: relative;
+}
+
+div.full_left > div.content > div.edit > form > div.item > div.item_column {
+    width: 100%;
+    max-width: 355px;
+}
+
+div.full_left > div.content > div.edit > form > div.item > div.item_column > div.item_explain {
+    margin-top: 15px;
+    width: 100%;
+    max-width: 355px;
+    color: #8c8c8c;
+    font-size: 12px;
+    line-height: 14px;
+}
+
+div.full_left > div.content > div.edit > form > div.item > div.item_column > div.item_detail > input {
+    width: 100%;
+    max-width: 355px;
+    height: 32px;
+    padding: 0 10px;
+    justify-content: flex-start;
+    align-items: stretch;
+    display: inline-block;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+}
+
+div.full_left > div.content > div.edit > form > div.item > div.item_column > div.item_detail > textarea {
+    width: 100%;
+    max-width: 355px;
+    height: 60px;
+    padding: 0 10px;
+    justify-content: flex-start;
+    align-items: stretch;
+    display: inline-block;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+}
+
+div.full_left > div.content > div.edit > form > div.button {
+    align-items: stretch;
+    text-align: center;
+    margin: 40px auto;
+}
+
+div.full_left > div.content > div.edit > form > div.button > button {
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: #0095f6;
+    color: #ffffff;
+    position: relative;
+}
+

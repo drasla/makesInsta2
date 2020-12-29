@@ -1,0 +1,52 @@
+{
+  "name": "makesInstar",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "body-parser": "^1.19.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "1.4.5",
+    "dotenv": "8.2.0",
+    "ejs": "3.1.5",
+    "express": "4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "1.17.1",
+    "express-validator": "6.6.1",
+    "jsonwebtoken": "^8.5.1",
+    "method-override": "3.0.0",
+    "multer": "^1.4.2",
+    "mysql": "2.18.1",
+    "mysql2": "2.2.5",
+    "reflect-metadata": "0.1.13",
+    "sequelize": "5.22.3",
+    "yarn": "1.22.10"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/bluebird": "3.5.32",
+    "@types/body-parser": "^1.19.0",
+    "@types/connect-flash": "^0.0.35",
+    "@types/cookie-parser": "1.4.2",
+    "@types/ejs": "3.0.4",
+    "@types/express": "4.17.8",
+    "@types/express-ejs-layouts": "^2.3.2",
+    "@types/express-session": "1.17.0",
+    "@types/express-validator": "3.0.0",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/method-override": "0.0.31",
+    "@types/multer": "^1.4.5",
+    "@types/mysql": "2.15.15",
+    "@types/node": "14.11.8",
+    "@types/validator": "13.1.0",
+    "sequelize-typescript": "1.1.0",
+    "ts-node": "9.0.0",
+    "typescript": "4.0.3"
+  }
+}

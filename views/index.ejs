@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Clone Instagram</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<div class="root">
+    <main role="main">
+        <article class="login">
+            <div class="leftImage">
+                <div class="leftImage_top">
+                    <img class="leftImage_slide"
+                         src="https://www.instagram.com/static/images/homepage/screenshot1.jpg/d6bf0c928b5a.jpg">
+                </div>
+            </div>
+            <div class="right">
+                <div class="rightDetail">
+                    <h1 class="sitename">Clone Instagram</h1>
+                    <div class="loginForm">
+                        <form class="form" id="loginForm" method="post" action="/users/login">
+                            <div class="input">
+                                <div class="inputbox">
+                                    <label class="label">
+                                        <span class="span">사용자명</span>
+                                        <input aria-label="사용자명" aria-required="true"
+                                               autocapitalize="off" autocorrect="off" maxlength="75" name="username"
+                                               type="text" class="inputtag" value="">
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="input">
+                                <div class="inputbox">
+                                    <label class="label">
+                                        <span class="span">비밀번호</span>
+                                        <input aria-label="비밀번호" aria-required="true" autocapitalize="off"
+                                               autocorrect="off" name="password" type="password" class="inputtag"
+                                               value="">
+                                    </label>
+                                </div>
+                            </div>
+                            <button class="input submit" type="submit">
+                                <div class="buttondiv">로그인</div>
+                            </button>
+                        </form>
+                        <% if (locals.Msg) { %>
+                            <h2 class="alert"><%= locals.Msg %></h2>
+                        <% } %>
+                    </div>
+                </div>
+                <div class="rightDetail">
+                    <p class="join">계정이 없으신가요? <a href="/users/join" target="_self">가입하기</a></p>
+                </div>
+            </div>
+
+        </article>
+    </main>
+</div>
+</body>
+
+</html>

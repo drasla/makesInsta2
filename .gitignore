@@ -1,0 +1,9 @@
+/node_modules
+/build/**/*
+/env
+/.idea
+
+
+# 필요없는 캐쉬파일
+/package-lock.json
+/yarn-error.log

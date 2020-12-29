@@ -1,0 +1,71 @@
+<section class="full_list" >
+    <div class="full_left" style="padding-bottom: 60px;">
+        <div class="content">
+            <div class="edit">
+                <div class="edit_pic">
+                    <div class="pic">
+                        <img src="/image/userpic/<%=picture%>">
+                    </div>
+                    <div class="item_detail">
+                        <h1><%=username%></h1>
+                        <a href="/users/edit/picture" target="_self">프로필 사진 바꾸기</a> | <a href="/users/edit/picture/delete" target="_self">프로필 사진 지우기</a>
+                    </div>
+                </div>
+                <form class="edit_detail" action="/users/edit" method="POST">
+                    <div class="item">
+                        <aside>
+                            <label for="name">이름</label>
+                        </aside>
+                        <div class="item_column">
+                            <div class="item_detail">
+                                <input type="text" placeholder="이름" value="<%=name%>">
+                            </div>
+                            <div class="item_explain">
+                                사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <aside>
+                            <label for="comment">소개</label>
+                        </aside>
+                        <div class="item_column">
+                            <div class="item_detail">
+                                <textarea><%=comment%></textarea>
+                            </div>
+                            <div class="item_explain">
+                                회원님의 소개글을 적어주세요. 내 페이지에 들어갔을 때 다른 사람들에게 보여지는 소개글입니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <aside>
+                            <label for="email">이메일</label>
+                        </aside>
+                        <div class="item_column">
+                            <div class="item_detail">
+                                <input type="text" placeholder="이메일" value="<%= email %>">
+                            </div>
+                            <div class="item_explain">
+                                비즈니스나 반려동물 등에 사용된 계정인 경우에도 회원님의 개인 정보를 입력하세요. 공개 프로필에는 포함되지 않습니다.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="button">
+                        <button type="submit">정보변경</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="side"></div>
+    <div class="full_right">
+        <div class="menu">
+            <div class="mymenu"><a href="/<%=locals.username%>" target="_self"><%=locals.name%> (@<%=locals.username%>)</a></div>
+            <div class="mymenu"><a href="/users/edit" target="_self">프로필 변경</a></div>
+            <div class="mymenu"><a href="/users/editpassword" target="_self">비밀번호 변경</a></div>
+            <div class="mymenu"><a href="/<%=locals.username%>/write" target="_self">글쓰기</a></div>
+            <div class="mymenu_bottom"><a href="/users/logout" target="_self">로그아웃</a></div>
+        </div>
+    </div>
+</section>
