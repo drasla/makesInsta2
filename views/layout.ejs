@@ -28,7 +28,13 @@
                     </div>
                     <div class="button">
                         <div class="mypic"></div>
-                        <a href="/<%=username%>" target="_self"><span class="mypic"><img alt="tae_garam님의 프로필 사진" draggable="false" src="/image/userpic/<%=picture%>"></span></a>
+                        <a href="/<%=username%>" target="_self"><span class="mypic">
+                                <% if(picture) { %>
+                                <img alt="tae_garam님의 프로필 사진" draggable="false" src="/image/userpic/<%=picture%>">
+                                <% } else { %>
+                                <img alt="tae_garam님의 프로필 사진" draggable="false" src="/image/userpic/nopic.jpg">
+                                <% } %>
+                            </span></a>
                     </div>
                 </div>
             </div>

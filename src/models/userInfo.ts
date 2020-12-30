@@ -12,6 +12,7 @@ export class UserInfo extends Model<UserInfo> {
         comment: "유저 이름"
     })
     nm: string;
+
     @Column({
         type: DataType.STRING(100),
         comment: "유저 비밀번호"

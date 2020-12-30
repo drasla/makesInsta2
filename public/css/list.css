@@ -762,11 +762,19 @@ div.full_left > div.content > div.edit > div.edit_pic > div.item_detail {
     margin-left: 30px;
 }
 
-div.full_left > div.content > div.edit > div.edit_pic > div.item_detail > h1 {
+div.full_left > div.content > div.edit > div.edit_pic > div.item_detail > h2 {
     font-size: 19px;
     line-height: 20px;
     margin: 0;
     overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+div.full_left > div.content > div.edit > div.edit_pic > div.item_detail > h1 {
+    font-size: 27px;
+    line-height: 38px;
+    margin: 0;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
@@ -853,9 +861,75 @@ div.full_left > div.content > div.edit > form > div.button {
 
 div.full_left > div.content > div.edit > form > div.button > button {
     border: 1px solid transparent;
+    padding: 8px 14px;
     border-radius: 5px;
     background-color: #0095f6;
     color: #ffffff;
     position: relative;
+}
+
+div.full_left > div.content > div.rightDetail {
+    -webkit-box-align: center;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #dbdbdb;
+    border-radius: 1px;
+    margin: 30px 0 10px;
+    padding: 10px 0;
+}
+
+div.full_left > div.content > div.rightDetail > p.redirect {
+    margin: 14px auto;
+    text-align: center;
+}
+
+div.full_left > div.content > div.edit > form > div.preview-image > div.upload-display > div.upload-thumb-wrap {
+    display:inline-block;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ffffff;
+}
+
+div.full_left > div.content > div.edit > form > div.preview-image > div.upload-display > div.upload-thumb-wrap > img {
+    display: block;
+    max-width: 580px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+div.full_left > div.content > div.edit > form > div.mypicFilebox {
+    text-align: center;
+    margin-top: 50px;
+}
+
+div.full_left > div.content > div.edit > form > div.mypicFilebox > label.fileUploadLabel {
+    padding: 8px 14px;
+    color: #ffffff;
+    font-size: 15px;
+    line-height: normal;
+    vartical-align: middle;
+    background-color: #0095f6;
+    cursor: pointer;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+}
+
+div.full_left > div.content > div.edit > form > div.mypicFilebox > input.uploadFileName {
+    display: inline-block;
+    padding: 8px 14px; /*label의 패딩값과 일치*/
+    font-size: inherit;
+    vertical-align: middle;
+    background-color: #f5f5f5;
+    border: 1px solid #ebebeb;
+    border-bottom-color: #e2e2e2;
+    border-radius: .25em;
+    -webkit-appearance: none; /*네이티브 외형 감추기*/
+    -moz-appearance: none;
+    appearance: none;
+    width: 100%;
+    max-width: 500px;
 }
 

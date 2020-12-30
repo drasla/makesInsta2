@@ -38,14 +38,5 @@
             <!-- 게시글 끝 -->
         </div>
     </div>
-    <div class="side"></div>
-    <div class="full_right">
-        <div class="menu">
-            <div class="mymenu"><a href="/<%=locals.username%>" target="_self"><%=locals.name%> (@<%=locals.username%>)</a></div>
-            <div class="mymenu"><a href="/users/edit" target="_self">프로필 변경</a></div>
-            <div class="mymenu"><a href="/users/editpassword" target="_self">비밀번호 변경</a></div>
-            <div class="mymenu"><a href="/<%=locals.username%>/write" target="_self">글쓰기</a></div>
-            <div class="mymenu_bottom"><a href="/users/logout" target="_self">로그아웃</a></div>
-        </div>
-    </div>
+    <%- include('../include/full_right') %>
 </section>

@@ -1,6 +1,9 @@
 import { Sequelize, SequelizeOptions } from "sequelize-typescript";
 import { Users } from "../../models/users";
 import { UserInfo } from "../../models/userInfo";
+import {Board} from "../../models/board";
+import {BoardLikes} from "../../models/boardLikes";
+import {BoardReplies} from "../../models/boardReplies";
 
 export class SequelizeUtil {
     static db: Sequelize;
@@ -21,7 +24,7 @@ export class SequelizeUtil {
 
         let db = new Sequelize(config);
 
-        db.addModels([Users, UserInfo]);
+        db.addModels([Users, UserInfo, Board, BoardLikes, BoardReplies]);
         await db.sync({
             alter: true,
             force: false,

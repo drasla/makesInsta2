@@ -1,0 +1,40 @@
+<section class="full_list" >
+    <div class="full_left" style="padding-bottom: 60px;">
+        <div class="content">
+            <div class="edit">
+                <div class="edit_pic">
+                    <div class="pic">
+                        <% if (picture) { %>
+                            <img src="/image/userpic/<%=picture%>">
+                        <% } else { %>
+                            <img src="/image/userpic/nopic.jpg">
+                        <% } %>
+                    </div>
+                    <div class="item_detail">
+                        <h1><%=username%></h1>
+                        <a href="/users/edit/picture/change" target="_self">프로필 사진 바꾸기</a> | <a href="/users/edit/picture/delete" target="_self">프로필 사진 지우기</a>
+                    </div>
+                </div>
+                <form class="edit_detail" action="/users/edit/picture/delete" method="POST">
+                    <input type="hidden" name="deleteOk" value="apply">
+                    <div class="alert" style="font-size: 16px; line-height: 30px; margin-top: 40px;">
+                        현재 등록되어 있는 프로필 사진을 지우고,<br>
+                        기본 설정된 사진으로 변경됩니다.<br>
+                        지워진 사진은 복구가 되지 않습니다.<br>
+                        그래도 진행하시겠습니까?
+                    </div>
+
+                    <% if (locals.Msg) { %>
+                    <h2 class="alert">
+                        <%=locals.Msg%>
+                    </h2>
+                    <% } %>
+                    <div class="button">
+                        <button type="submit">사진삭제</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <%- include('../include/full_right') %>
+</section>

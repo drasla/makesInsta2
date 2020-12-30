@@ -6,6 +6,8 @@ import {ErrorMsg} from "../consts/errorMessage";
 import {UserInfo} from "../models/userInfo";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
 import {CookieID} from "../consts/const";
+import fs from "fs";
+import {UserpicUpload} from "../services/fileUpload";
 
 export const UserRouter = express.Router();
 
@@ -235,7 +237,7 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     if(!name || !comment || !email) {
-        res.render("user/edit", {
+        return res.render("user/edit", {
             "username": req.userinfo.username,
             "name": userInformation.name,
             "comment": userInformation.comment,
@@ -243,6 +245,7 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
             "email": userInformation.email,
             Msg: ErrorMsg.NotInputValue
         });
+
     }
 
     const update = await SequelizeUtil.db.transaction<{
@@ -300,4 +303,270 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
         "picture": userInformation.picture,
         "Msg": update.msg
     });
+}));
+
+UserRouter.get("/edit/picture/change", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    res.render("user/pictureChange", {
+        "username": req.userinfo.username,
+        "name": userInformation.name,
+        "comment": userInformation.comment,
+        "picture": userInformation.picture,
+        "email": userInformation.email
+    })
+}));
+
+UserRouter.post("/edit/picture/change", Auth, UserpicUpload.single("changePic"), WrapHandler(async (req, res) =>  {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    if(!req.file) {
+        return res.render("user/edit", {
+            "username": req.userinfo.username,
+            "name": userInformation.name,
+            "comment": userInformation.comment,
+            "picture": userInformation.picture,
+            "email": userInformation.email,
+            Msg: ErrorMsg.NotInputValue
+        });
+    }
+
+    const userpicUpdate = await SequelizeUtil.db.transaction<{
+        isUpdate: boolean,
+        msg?: string
+    }>(async t => {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: req.userinfo.username
+            },
+            transaction: t
+        });
+
+        if (!user) {
+            return {
+                isUpdate: false,
+                msg: "회원 정보가 없습니다. 다시 시도해주세요."
+            };
+        }
+        if (userInformation.picture !== "") {
+            fs.unlinkSync('public/image/userpic/' + userInformation.picture);
+        }
+
+        await UserInfo.update({
+                picture: req.file.filename
+            },
+            {
+                where: {
+                    userId: user.userInfoId
+                },
+                transaction: t
+            });
+
+        return {
+            isUpdate: true,
+            msg: ErrorMsg.ChangePicOK
+        };
+    });
+
+    res.render("user/editresult", {
+        "username": req.userinfo.username,
+        "picture": req.file.filename,
+        "Msg": userpicUpdate.msg
+    });
 }))
+
+UserRouter.get("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    res.render("user/pictureDelete", {
+        "username": req.userinfo.username,
+        "name": userInformation.name,
+        "comment": userInformation.comment,
+        "picture": userInformation.picture,
+        "email": userInformation.email
+    })
+}));
+
+UserRouter.post("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    const {deleteOk} = req.body;
+
+    if(deleteOk != "apply") {
+        return res.render("user/edit", {
+            "username": req.userinfo.username,
+            "name": userInformation.name,
+            "comment": userInformation.comment,
+            "picture": userInformation.picture,
+            "email": userInformation.email,
+            Msg: ErrorMsg.NotInputValue
+        });
+    }
+
+    const pictureDelete = await SequelizeUtil.db.transaction<{
+        isUpdate: boolean,
+        msg?: string
+    }>(async t => {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: req.userinfo.username
+            },
+            transaction: t
+        });
+
+        if (!user) {
+            return {
+                isUpdate: false,
+                msg: "회원 정보가 없습니다. 다시 시도해주세요."
+            };
+        }
+
+        await UserInfo.update({
+                picture: ""
+            },
+            {
+                where: {
+                    userId: user.userInfoId
+                },
+                transaction: t
+            });
+
+        if(userInformation.picture !== "") {
+            fs.unlinkSync('public/image/userpic/' + userInformation.picture);
+        }
+
+        return {
+            isUpdate: true,
+            msg: ErrorMsg.EditUpdateOK
+        };
+    });
+
+    return res.render("user/editresult", {
+        "username": req.userinfo.username,
+        "picture": "nopic.jpg",
+        "Msg": pictureDelete.msg
+    });
+}));
+
+UserRouter.get("/edit/password", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    res.render("user/passwordChange", {
+        "username": req.userinfo.username,
+        "name": userInformation.name,
+        "comment": userInformation.comment,
+        "picture": userInformation.picture,
+        "email": userInformation.email
+    })
+}));
+
+UserRouter.post("/edit/password", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const userInformation = await FindUserInfo(req.userinfo.username);
+
+    const {prev_password, next_password1, next_password2} = req.body;
+
+    if(!prev_password || !next_password1 || !next_password2) {
+        return res.render("user/passwordChange", {
+            "username": req.userinfo.username,
+            "name": userInformation.name,
+            "comment": userInformation.comment,
+            "picture": userInformation.picture,
+            "email": userInformation.email,
+            Msg: ErrorMsg.NotInputValue
+        });
+    }
+
+    const changePassword = await SequelizeUtil.db.transaction<{
+        isUpdate: boolean,
+        msg?: string
+    }>(async t => {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: req.userinfo.username
+            },
+            transaction: t
+        });
+
+        if (!user) {
+            return {
+                isUpdate: false,
+                msg: "회원 정보가 없습니다. 다시 시도해주세요."
+            };
+        }
+
+        const userInfo = await UserInfo.findOne<UserInfo>({
+            where: {
+                userId: user.userInfoId
+            },
+            transaction: t
+        });
+
+        if (userInfo && userInfo.pw !== prev_password) {
+            return {
+                isUpdate: false,
+                msg: ErrorMsg.PasswordNotCorrect
+            }
+        }
+
+        if (next_password1 !== next_password2) {
+            return {
+                isUpdate: false,
+                msg: ErrorMsg.PasswordNotSame
+            }
+        }
+
+        await UserInfo.update({
+                pw: next_password1
+            },
+            {
+                where: {
+                    userId: user.userInfoId
+                },
+                transaction: t
+            });
+
+        return {
+            isUpdate: true,
+            msg: ErrorMsg.EditUpdateOK
+        };
+    });
+
+    if (changePassword.isUpdate) {
+        return res.render("user/editresult", {
+            "username": req.userinfo.username,
+            "picture": userInformation.picture,
+            "Msg": changePassword.msg
+        });
+    } else {
+        return res.render("user/passwordChange", {
+            "username": req.userinfo.username,
+            "name": userInformation.name,
+            "picture": userInformation.picture,
+            Msg: changePassword.msg
+        });
+    }
+}));
