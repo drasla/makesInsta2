@@ -10,7 +10,7 @@ export const storage = (folder: string) => {
             if (folder === "userpic") {
                 callback(null, "public/image/userpic");
             } else {
-                callback(null, "public/image/content");
+                callback(null, "public/image/boardpic");
             }
             // const date: string = moment().format("YYMMDD");
             // if (file.originalname.match(/\.(jpg|jpeg|png|gif)$/)) {
@@ -38,6 +38,13 @@ export const storage = (folder: string) => {
 
 export const UserpicUpload = multer({
     storage: storage("userpic"),
+    limits: {
+        files: 10
+    }
+})
+
+export const BoardPicUpload = multer({
+    storage: storage("boardpic"),
     limits: {
         files: 10
     }

@@ -8,12 +8,6 @@ import {Column, DataType, Model, Table} from "sequelize-typescript";
 })
 export class Board extends Model<Board> {
     @Column({
-        type:DataType.STRING(100),
-        comment: "제목"
-    })
-    subject: string;
-
-    @Column({
         type:DataType.TEXT,
         comment: "내용"
     })
@@ -35,7 +29,7 @@ export class Board extends Model<Board> {
         type: DataType.INTEGER,
         comment: "댓글 수"
     })
-    reply: number;
+    replies: number;
 
     @Column({
         type: DataType.INTEGER,

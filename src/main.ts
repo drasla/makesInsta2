@@ -40,7 +40,7 @@ app.use(session({
 }));
 
 app.use("/users", UserRouter);
-app.use("/:id", BoardRouter)
+app.use("/:id", BoardRouter);
 app.use("/", IndexRouter);
 app.use("/", InvalidRequest);
 
