@@ -4,14 +4,14 @@
             <div class="edit">
                 <div class="edit_pic">
                     <div class="pic">
-                        <% if (picture) { %>
-                        <img src="/image/userpic/<%=picture%>">
+                        <% if (myinfo.picture) { %>
+                        <img src="/image/userpic/<%=myinfo.picture%>">
                         <% } else { %>
                             <img src="/image/userpic/nopic.jpg">
                         <% } %>
                     </div>
                     <div class="item_detail">
-                        <h2><%=username%></h2>
+                        <h2><%=myinfo.username%></h2>
                         <a href="/users/edit/picture/change" target="_self">프로필 사진 바꾸기</a> | <a href="/users/edit/picture/delete" target="_self">프로필 사진 지우기</a>
                     </div>
                 </div>

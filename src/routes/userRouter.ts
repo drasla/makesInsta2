@@ -219,11 +219,13 @@ UserRouter.get("/edit", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("user/edit", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture,
-        "email": userInformation.email
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }));
 
@@ -238,11 +240,13 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
 
     if(!name || !comment || !email) {
         return res.render("user/edit", {
-            "username": req.userinfo.username,
-            "name": userInformation.name,
-            "comment": userInformation.comment,
-            "picture": userInformation.picture,
-            "email": userInformation.email,
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
             Msg: ErrorMsg.NotInputValue
         });
 
@@ -299,8 +303,13 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
     });
 
     res.render("user/result", {
-        "username": req.userinfo.username,
-        "picture": userInformation.picture,
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
         "Msg": update.msg
     });
 }));
@@ -313,11 +322,13 @@ UserRouter.get("/edit/picture/change", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("user/pictureChange", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture,
-        "email": userInformation.email
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }));
 
@@ -330,12 +341,14 @@ UserRouter.post("/edit/picture/change", Auth, UserpicUpload.single("changePic"),
 
     if(!req.file) {
         return res.render("user/edit", {
-            "username": req.userinfo.username,
-            "name": userInformation.name,
-            "comment": userInformation.comment,
-            "picture": userInformation.picture,
-            "email": userInformation.email,
-            Msg: ErrorMsg.NotInputValue
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture,
+                Msg: ErrorMsg.NotInputValue
+            }
         });
     }
 
@@ -377,8 +390,13 @@ UserRouter.post("/edit/picture/change", Auth, UserpicUpload.single("changePic"),
     });
 
     res.render("user/editresult", {
-        "username": req.userinfo.username,
-        "picture": req.file.filename,
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: req.file.filename
+        },
         "Msg": userpicUpdate.msg
     });
 }))
@@ -391,11 +409,13 @@ UserRouter.get("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("user/pictureDelete", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture,
-        "email": userInformation.email
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }));
 
@@ -410,11 +430,13 @@ UserRouter.post("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
 
     if(deleteOk != "apply") {
         return res.render("user/edit", {
-            "username": req.userinfo.username,
-            "name": userInformation.name,
-            "comment": userInformation.comment,
-            "picture": userInformation.picture,
-            "email": userInformation.email,
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
             Msg: ErrorMsg.NotInputValue
         });
     }
@@ -458,8 +480,13 @@ UserRouter.post("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
     });
 
     return res.render("user/editresult", {
-        "username": req.userinfo.username,
-        "picture": "nopic.jpg",
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: "nopic.jpg"
+        },
         "Msg": pictureDelete.msg
     });
 }));
@@ -472,11 +499,13 @@ UserRouter.get("/edit/password", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("user/passwordChange", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture,
-        "email": userInformation.email
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }));
 
@@ -491,11 +520,13 @@ UserRouter.post("/edit/password", Auth, WrapHandler(async (req, res) => {
 
     if(!prev_password || !next_password1 || !next_password2) {
         return res.render("user/passwordChange", {
-            "username": req.userinfo.username,
-            "name": userInformation.name,
-            "comment": userInformation.comment,
-            "picture": userInformation.picture,
-            "email": userInformation.email,
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
             Msg: ErrorMsg.NotInputValue
         });
     }
@@ -557,15 +588,24 @@ UserRouter.post("/edit/password", Auth, WrapHandler(async (req, res) => {
 
     if (changePassword.isUpdate) {
         return res.render("user/editresult", {
-            "username": req.userinfo.username,
-            "picture": userInformation.picture,
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
             "Msg": changePassword.msg
         });
     } else {
         return res.render("user/passwordChange", {
-            "username": req.userinfo.username,
-            "name": userInformation.name,
-            "picture": userInformation.picture,
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
             Msg: changePassword.msg
         });
     }

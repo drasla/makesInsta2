@@ -4,14 +4,14 @@
             <div class="edit">
                 <div class="edit_pic">
                     <div class="pic">
-                        <% if (picture) { %>
-                            <img src="/image/userpic/<%=picture%>">
+                        <% if (myinfo.picture) { %>
+                            <img src="/image/userpic/<%=myinfo.picture%>">
                         <% } else { %>
                             <img src="/image/userpic/nopic.jpg">
                         <% } %>
                     </div>
                     <div class="item_detail">
-                        <h2><%=username%></h2>
+                        <h2><%=myinfo.username%></h2>
                         <a href="/users/edit/picture/change" target="_self">프로필 사진 바꾸기</a> | <a href="/users/edit/picture/delete" target="_self">프로필 사진 지우기</a>
                     </div>
                 </div>
@@ -22,7 +22,7 @@
                         </aside>
                         <div class="item_column">
                             <div class="item_detail">
-                                <input type="text" name="name" placeholder="이름" value="<%=name%>">
+                                <input type="text" name="name" placeholder="이름" value="<%=myinfo.name%>">
                             </div>
                             <div class="item_explain">
                                 사람들이 이름, 별명 또는 비즈니스 이름 등 회원님의 알려진 이름을 사용하여 회원님의 계정을 찾을 수 있도록 도와주세요.
@@ -35,7 +35,7 @@
                         </aside>
                         <div class="item_column">
                             <div class="item_detail">
-                                <textarea name="comment"><%=comment%></textarea>
+                                <textarea name="comment"><%=myinfo.comment%></textarea>
                             </div>
                             <div class="item_explain">
                                 회원님의 소개글을 적어주세요. 내 페이지에 들어갔을 때 다른 사람들에게 보여지는 소개글입니다.
@@ -48,7 +48,7 @@
                         </aside>
                         <div class="item_column">
                             <div class="item_detail">
-                                <input type="text" name="email" placeholder="이메일" value="<%= email %>">
+                                <input type="text" name="email" placeholder="이메일" value="<%=myinfo.email%>">
                             </div>
                             <div class="item_explain">
                                 비즈니스나 반려동물 등에 사용된 계정인 경우에도 회원님의 개인 정보를 입력하세요. 공개 프로필에는 포함되지 않습니다.

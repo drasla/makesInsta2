@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title><%=locals.name%>(@<%=locals.username%>) • Clone Instagram 사진</title>
+    <title><%=myinfo.name%>(@<%=myinfo.username%>) • Clone Instagram 사진</title>
     <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/list.css">
     <script type="text/javascript" src="/js/jquery.min.js"></script>
@@ -28,11 +28,11 @@
                     </div>
                     <div class="button">
                         <div class="mypic"></div>
-                        <a href="/<%=username%>" target="_self"><span class="mypic">
-                                <% if(picture) { %>
-                                <img alt="tae_garam님의 프로필 사진" draggable="false" src="/image/userpic/<%=picture%>">
+                        <a href="/<%=myinfo.picture%>" target="_self"><span class="mypic">
+                                <% if(myinfo.picture) { %>
+                                <img draggable="false" src="/image/userpic/<%=myinfo.picture%>">
                                 <% } else { %>
-                                <img alt="tae_garam님의 프로필 사진" draggable="false" src="/image/userpic/nopic.jpg">
+                                <img draggable="false" src="/image/userpic/nopic.jpg">
                                 <% } %>
                             </span></a>
                     </div>

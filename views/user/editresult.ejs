@@ -4,14 +4,14 @@
             <div class="edit">
                 <div class="edit_pic">
                     <div class="pic">
-                        <% if (picture) { %>
-                        <img src="/image/userpic/<%=picture%>">
+                        <% if (myinfo.picture) { %>
+                        <img src="/image/userpic/<%=myinfo.picture%>">
                         <% } else { %>
                             <img src="/image/userpic/nopic.jpg">
                         <% } %>
                     </div>
                     <div class="item_detail">
-                        <h1><%=username%></h1>
+                        <h1><%=myinfo.username%></h1>
                     </div>
                 </div>
                     <% if (locals.Msg) { %>

@@ -933,3 +933,34 @@ div.full_left > div.content > div.edit > form > div.mypicFilebox > input.uploadF
     max-width: 500px;
 }
 
+div.full_left > div.content > div.write {
+    padding: 0;
+    margin-bottom: 60px;
+    border-radius: 3px;
+    border: 1px solid #dbdbdb;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    padding: 0;
+    position: relative;
+    background-color: #ffffff;
+}
+
+div.full_left > div.content > div.uploaderPic {
+    display: block;
+    height: fit-content;
+    width: fit-content;
+    position: relative;
+    align-items: stretch;
+    box-sizing: border-box;
+    flex-shrink: 0;
+    margin: 0;
+    padding: 0;
+}
+
+div.full_left > div.content > div.uploaderPic {
+
+}
+

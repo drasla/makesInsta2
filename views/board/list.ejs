@@ -3,8 +3,8 @@
         <div class="mypic">
             <div class="mypic_inner">
                 <a href="/">
-                    <% if (picture) { %>
-                        <img alt="프로필 사진 바꾸기" class="be6sR" src="/image/userpic/<%=picture%>">
+                    <% if (myinfo.picture) { %>
+                        <img alt="프로필 사진 바꾸기" class="be6sR" src="/image/userpic/<%=myinfo.picture%>">
                     <% } else { %>
                         <img alt="프로필 사진 바꾸기" class="be6sR" src="/image/userpic/nopic.jpg">
                     <% } %>
@@ -13,14 +13,14 @@
         </div>
         <div class="myinfo">
             <div class="myinfo_name">
-                <h2><%=username%></h2>
+                <h2><%=myinfo.username%></h2>
             </div>
             <div class="myinfo_count">
                 <h3>게시물 111</h3>
             </div>
             <div class="myinfo_info">
-                <h3><%=name%></h3>
-                <%=comment%>
+                <h3><%=myinfo.name%></h3>
+                <%=myinfo.comment%>
             </div>
         </div>
     </header>

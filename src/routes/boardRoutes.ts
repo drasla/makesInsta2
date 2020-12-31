@@ -12,10 +12,13 @@ BoardRouter.get("/", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("board/list", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }));
 
@@ -27,9 +30,12 @@ BoardRouter.get("/write", Auth, WrapHandler(async (req, res) => {
     const userInformation = await FindUserInfo(req.userinfo.username);
 
     res.render("board/write", {
-        "username": req.userinfo.username,
-        "name": userInformation.name,
-        "comment": userInformation.comment,
-        "picture": userInformation.picture
+        myinfo: {
+            username: req.userinfo.username,
+            name: userInformation.name,
+            comment: userInformation.comment,
+            email: userInformation.email,
+            picture: userInformation.picture
+        },
     })
 }))
