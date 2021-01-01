@@ -41,6 +41,9 @@ export const FindPosts = async (userId: number) => {
             where: {
                 userId: userId
             },
+            order: [
+                ["id", "desc"]
+            ],
             transaction: t
         });
 
