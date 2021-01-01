@@ -44,7 +44,9 @@ export const CreateToken = (id: Number, username: String, name: String) => {
 
 export const FindUserInfo = async (username: string) => {
     const findUser = await SequelizeUtil.db.transaction<{
-        isFind: boolean
+        isFind: boolean,
+        userId?: number,
+        username?: string,
         name?: string,
         password?: string,
         email?: string,
@@ -86,6 +88,7 @@ export const FindUserInfo = async (username: string) => {
         return {
             isFind: true,
             username: user.username,
+            userId: user.id,
             name: userInfo.nm,
             password: userInfo.pw,
             email: userInfo.email,

@@ -1,35 +1,70 @@
 import express from "express";
-import { ErrorMsg } from "../consts/errorMessage";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
+import {CountOfPosts, FindPosts, PlusPostCount} from "../services/boardService";
 import {BoardPicUpload} from "../services/fileUpload";
+import {ErrorMsg} from "../consts/errorMessage";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
 import {Users} from "../models/users";
 import {Board} from "../models/board";
 
-export const BoardRouter = express.Router();
+export const IndexRouter = express.Router();
 
-BoardRouter.get('/:boardNum([0-9]{1,10})', Auth, WrapHandler(async (req, res) => {
+IndexRouter.get("/", Auth, WrapHandler(async (req, res) => {
+    if(req.userinfo) {
+        const userInformation = await FindUserInfo(req.userinfo.username);
+        res.render("board/full_list", {
+            myinfo: {
+                username: req.userinfo.username,
+                name: userInformation.name,
+                comment: userInformation.comment,
+                email: userInformation.email,
+                picture: userInformation.picture
+            },
+        })
+    } else {
+        res.render("index", { layout: false });
+    }
+}));
+
+IndexRouter.get("/:id", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
     }
 
-    const userInformation = await FindUserInfo(req.userinfo.username);
+    const myInformation = await FindUserInfo(req.userinfo.username);
 
+    const targetInformation = await FindUserInfo(req.params.id);
 
+    if (!targetInformation.isFind || !targetInformation.userId) {
+        return res.redirect("/");
+    }
 
-    res.render("board/read", {
+    const count = await CountOfPosts(targetInformation.userId);
+
+    const posts: object = await FindPosts(targetInformation.userId);
+
+    return res.render("board/list", {
         myinfo: {
             username: req.userinfo.username,
-            name: userInformation.name,
-            comment: userInformation.comment,
-            email: userInformation.email,
-            picture: userInformation.picture
+            name: myInformation.name,
+            comment: myInformation.comment,
+            email: myInformation.email,
+            picture: myInformation.picture
         },
+        targetinfo: {
+            username: targetInformation.username,
+            name: targetInformation.name,
+            comment: targetInformation.comment,
+            email: targetInformation.email,
+            picture: targetInformation.picture
+        },
+        count: count.count,
+        posts: posts,
     })
-}));
+}))
 
-BoardRouter.get("/write", Auth, WrapHandler(async (req, res) => {
+IndexRouter.get("/:id/write", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
     }
@@ -47,7 +82,7 @@ BoardRouter.get("/write", Auth, WrapHandler(async (req, res) => {
     })
 }))
 
-BoardRouter.post("/write", Auth, BoardPicUpload.single("writePic"), WrapHandler(async (req, res) => {
+IndexRouter.post("/:id/write", Auth, BoardPicUpload.single("writePic"), WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
     }
@@ -101,10 +136,13 @@ BoardRouter.post("/write", Auth, BoardPicUpload.single("writePic"), WrapHandler(
             transaction: t
         });
 
+        const plus = PlusPostCount(user.id);
+
         return {
             isWrite: true
         }
     });
+
 
     if (boardWrite.isWrite) {
         return res.redirect("/");
@@ -120,22 +158,4 @@ BoardRouter.post("/write", Auth, BoardPicUpload.single("writePic"), WrapHandler(
             Msg: boardWrite.msg
         });
     }
-}));
-
-BoardRouter.get("/", Auth, WrapHandler(async (req, res) => {
-    if(!req.userinfo) {
-        return res.redirect("/");
-    }
-
-    const userInformation = await FindUserInfo(req.userinfo.username);
-
-    res.render("board/list", {
-        myinfo: {
-            username: req.userinfo.username,
-            name: userInformation.name,
-            comment: userInformation.comment,
-            email: userInformation.email,
-            picture: userInformation.picture
-        },
-    })
 }));

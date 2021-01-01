@@ -1,80 +1,66 @@
-<section class="my_list">
-    <header>
-        <div class="mypic">
-            <div class="mypic_inner">
-                <a href="/">
-                    <% if (myinfo.picture) { %>
-                        <img alt="프로필 사진 바꾸기" class="be6sR" src="/image/userpic/<%=myinfo.picture%>">
-                    <% } else { %>
-                        <img alt="프로필 사진 바꾸기" class="be6sR" src="/image/userpic/nopic.jpg">
-                    <% } %>
-                </a>
+<section class="full_list">
+    <div class="full_left">
+        <div class="content">
+            <header>
+                <div class="mypic">
+                    <div class="mypic_inner">
+                        <a href="/">
+                            <% if (targetinfo.picture) { %>
+                            <img class="be6sR" src="/image/userpic/<%= targetinfo.picture %>">
+                            <% } else { %>
+                                <img class="be6sR" src="/image/userpic/nopic.jpg">
+                            <% } %>
+                        </a>
+                    </div>
+                </div>
+                <div class="myinfo">
+                    <div class="myinfo_name">
+                        <h2><%= targetinfo.username %></h2>
+                    </div>
+                    <div class="myinfo_count">
+                        <h3>게시물 <%= locals.count %></h3>
+                    </div>
+                    <div class="myinfo_info">
+                        <h3><%= targetinfo.name %></h3>
+                        <%= targetinfo.comment %>
+                    </div>
+                </div>
+            </header>
+            <div class="border"></div>
+            <div class="postList">
+                <% for (let i=0; i< posts.count; i++) { %>
+                <% } %>
+                <!-- 게시물 줄 시작 -->
+                <div class="third">
+                    <!-- 게시물 시작 -->
+                    <article class="item">
+                        <a href="/" target="_blank">
+                            <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
+                        </a>
+                    </article>
+                    <!-- 게시물 끝 -->
+                    <!-- 게시물 시작 -->
+                    <article class="item">
+                        <a href="/" target="_blank">
+                            <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
+                        </a>
+                    </article>
+                    <!-- 게시물 끝 -->
+                    <!-- 게시물 시작 -->
+                    <article class="item_end">
+                        <a href="/" target="_blank">
+                            <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
+                        </a>
+                    </article>
+                    <!-- 게시물 끝 -->
+                </div>
+                <!-- 게시물 줄 끝 -->
             </div>
+            <!-- 게시물 줄 끝 -->
         </div>
-        <div class="myinfo">
-            <div class="myinfo_name">
-                <h2><%=myinfo.username%></h2>
-            </div>
-            <div class="myinfo_count">
-                <h3>게시물 111</h3>
-            </div>
-            <div class="myinfo_info">
-                <h3><%=myinfo.name%></h3>
-                <%=myinfo.comment%>
-            </div>
         </div>
-    </header>
-    <div class="border"></div>
-    <div class="content">
-        <!-- 게시물 줄 시작 -->
-            <div class="third">
-                <!-- 게시물 시작 -->
-                <article class="item">
-                    <a href="/" target="_blank">
-                        <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                    </a>
-                </article>
-                <!-- 게시물 끝 -->
-                <!-- 게시물 시작 -->
-                <article class="item">
-                    <a href="/" target="_blank">
-                        <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                    </a>
-                </article>
-                <!-- 게시물 끝 -->
-                <!-- 게시물 시작 -->
-                <article class="item_end">
-                    <a href="/" target="_blank">
-                        <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                    </a>
-                </article>
-                <!-- 게시물 끝 -->
-            </div>
-        <!-- 게시물 줄 끝 -->
-        <!-- 게시물 줄 시작 -->
-        <div class="third">
-            <!-- 게시물 시작 -->
-            <article class="item">
-                <a href="/" target="_blank">
-                    <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                </a>
-            </article>
-            <!-- 게시물 끝 -->
-            <!-- 게시물 시작 -->
-            <article class="item">
-                <a href="/" target="_blank">
-                    <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                </a>
-            </article>
-            <!-- 게시물 끝 -->
-            <!-- 게시물 시작 -->
-            <article class="item_end">
-                <a href="/" target="_blank">
-                    <img alt="Photo by Tae.Garam on December 23, 2020. 이미지: 전화." class="FFVAD" decoding="auto" style="object-fit: cover;" sizes="293px" srcset="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s150x150/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=888676aedd5271b2ce7d545ac399cb23&amp;oe=60148DE9 150w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s240x240/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=65524636f09395f3844b4925981af7e1&amp;oe=60142A21 240w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s320x320/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=24be545ec90d2199ca8bf8df350e69eb&amp;oe=6014D180 320w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/e35/c240.0.960.960a/s480x480/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=ec798a40d6eb093e1fde8ccade4db652&amp;oe=6015BEBE 480w,https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17 640w" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-15/sh0.08/e35/c240.0.960.960a/s640x640/132085267_1050791038774716_4621634039895962004_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_cat=100&amp;_nc_ohc=F5kOm4KplKsAX_vzQc5&amp;tp=1&amp;oh=866e4ed3b24d602f8e48bfb46d0d4aa7&amp;oe=60131B17">
-                </a>
-            </article>
-            <!-- 게시물 끝 -->
-        </div>
-        <!-- 게시물 줄 끝 -->
     </div>
+    <%- include('../include/full_right') %>
 </section>
+
+

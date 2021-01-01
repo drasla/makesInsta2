@@ -39,4 +39,10 @@ export class UserInfo extends Model<UserInfo> {
         comment: "유저 프로필 사진"
     })
     picture: string;
+
+    @Column({
+        type:DataType.INTEGER,
+        comment: "게시글 갯수"
+    })
+    posts: number;
 }

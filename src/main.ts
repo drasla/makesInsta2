@@ -5,10 +5,9 @@ import path from "path";
 import expressEjsLayouts from "express-ejs-layouts";
 import cookieParser from "cookie-parser";
 import session from "express-session";
-import { IndexRouter } from "./routes/rootRoutes";
+import { IndexRouter } from "./routes/indexRoutes";
 import { UserRouter } from "./routes/userRouter";
 import { InvalidRequest } from "./routes/invalidRequest";
-import {BoardRouter} from "./routes/boardRoutes";
 
 DotEnv.loadEnv();
 SequelizeUtil.connect().then();
@@ -39,8 +38,11 @@ app.use(session({
     }
 }));
 
+app.param("id", (req, res, next, id) => {
+    next();
+})
+
 app.use("/users", UserRouter);
-app.use("/:id", BoardRouter);
 app.use("/", IndexRouter);
 app.use("/", InvalidRequest);
 

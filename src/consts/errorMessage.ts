@@ -8,4 +8,7 @@ export const ErrorMsg = {
     NotFoundToken: "토큰이 잘못되었습니다. 관리자에게 문의해주세요.",
     EditUpdateOK: "회원 프로필 업데이트가 완료되었습니다.",
     ChangePicOK: "프로필 사진 변경이 완료되었습니다.",
+
+    /* 게시판 관련 오류 메세지 */
+    NotFoundPosts : "게시글이 존재하지 않습니다.",
 }
