@@ -3,6 +3,7 @@ import {UserInfo} from "../models/userInfo";
 import {Board} from "../models/board";
 import {ErrorMsg} from "../consts/errorMessage";
 import {Users} from "../models/users";
+import {BoardReplies} from "../models/boardReplies";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -26,6 +27,32 @@ export const CountOfPosts = async (userId: number) => {
         return {
             isCount: true,
             count: userInfo.posts
+        }
+    })
+    return count;
+}
+
+export const CountOfComments = async (boardId: number) => {
+    const count = await SequelizeUtil.db.transaction<{
+        isCount: boolean,
+        count?: number
+    }>(async t => {
+        const board = await Board.findOne<Board>({
+            where: {
+                id: boardId
+            },
+            transaction: t
+        });
+
+        if (!board) {
+            return {
+                isCount: false
+            }
+        } else {
+            return {
+                isCount: true,
+                count: board.replies
+            }
         }
     })
     return count;
@@ -77,6 +104,7 @@ export const ViewPost = async (username: string, boardId: number) => {
     const post = await SequelizeUtil.db.transaction<{
         isPost: boolean,
         data?: object,
+        userinfo?: object,
         msg?: string
     }>(async t=> {
         const user = await Users.findOne<Users>({
@@ -98,13 +126,6 @@ export const ViewPost = async (username: string, boardId: number) => {
                 id: boardId,
                 userId: user.id
             },
-            include: [{
-                model: Users,
-                where: {
-                    id: user.id
-                },
-                required: true,
-            }],
             transaction: t
         });
 
@@ -117,7 +138,8 @@ export const ViewPost = async (username: string, boardId: number) => {
 
         return {
             isPost: true,
-            data: board
+            data: board,
+            userinfo: user
         }
     })
 
@@ -150,4 +172,66 @@ export const PlusPostCount = async (userId: number) => {
         }
     })
     return plus;
+}
+
+export const ChangeCommentCount = async (boardId: number, type: string) => {
+    const plus = await SequelizeUtil.db.transaction<{
+        isPlus: boolean
+    }>(async t => {
+        const prevCount = await CountOfComments(boardId);
+
+        if (prevCount.count) {
+            if (type === "plus") {
+                var resultCount = prevCount.count + 1;
+            } else {
+                var resultCount = prevCount.count - 1;
+            }
+
+            await Board.update({
+                    replies: resultCount
+                },
+                {
+                    where: {
+                        id: boardId
+                    },
+                    transaction: t
+                });
+
+            return {
+                isPlus: true
+            }
+        } else {
+            return {
+                isPlus: false
+            }
+        }
+    })
+    return plus;
+}
+
+export const WriteComment = async (targetUserId: number, boardId: number, type: string, contents?: string) => {
+    const commentWrite = await SequelizeUtil.db.transaction<{
+        isWrite: boolean
+    }>(async t => {
+        const comment = await BoardReplies.create({
+            boardNumber: boardId,
+            userId: targetUserId,
+            contents: contents,
+            },
+            {
+                transaction: t
+            });
+
+        await ChangeCommentCount(boardId, type);
+
+        await comment.save({
+            transaction: t
+        })
+
+        return {
+            isWrite: true
+        }
+    })
+
+    return commentWrite;
 }

@@ -19,20 +19,31 @@
                             <div class="latest_commenter_pic" style="width: 32px; height: 32px;">
                                 <a href="/" target="_self"><img alt="jun_chois_님의 프로필 사진" class="_6q-tv" data-testid="user-avatar" draggable="false" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/117276664_374019253584463_5964684907683473736_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_ohc=ZJCwWvohQxEAX93twrx&amp;tp=1&amp;oh=7890126267c44b63f7a3c3ea7e642e95&amp;oe=601362F3"></a>
                             </div>
-                            <div class="latest_commenter_name"><b>jun_chois_</b> 님&nbsp;<b>외 111명</b>이 좋아합니다.</div>
+                            <div class="latest_commenter_name"><b>jun_chois_</b> 님&nbsp;<b>외 <%=posts.data.likes%>명</b>이 좋아합니다.</div>
                         </div>
                     </div>
                     <div class="content">
-                        <div class="uploader_name"><span class="name"><%=posts.data.username%></span><span class="text">퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪퇴근하고 머리자름, 이제 체중달기 무섭다🤪</span></div>
+                        <div class="uploader_name"><span class="name"><%=posts.userinfo.username%></span><span class="text"><%=posts.data.contents%></span></div>
                     </div>
                     <div class="comment">
-                        <div class="countComment">댓글 6개 모두 보기</div>
+                        <div class="countComment">댓글 <%=posts.data.replies%>개</div>
                         <!-- 코멘트 반복 시작 -->
                         <div class="comment_name"><span class="name">kr_jess_98</span><span class="text">헐 너무 이쁘시네요! 어디서 자르셨나요?-</span></div>
-                        <div class="comment_name"><span class="name">zxcvnzc9448</span><span class="text">그냥 집 앞 미용실이여</span></div>
                         <!-- 코멘트 반복 끝 -->
                     </div>
-                    <div class="time">3시간 </div>
+                    <div class="time"><%=posts.data.createdAt%></div>
+                    <div class="comment_write">
+                        <form class="comment_write" action="/<%=targetinfo.username%>/<%=posts.data.id%>/comment" method="POST">
+                                <script type="application/javascript">
+                                    function keyup(obj) {
+                                        obj.style.height = '15px';
+                                        obj.style.height = (obj.scrollHeight) + 'px';
+                                    }
+                                </script>
+                                <textarea class="comment_write" onkeyup="keyup(this)" placeholder="댓글 달기..." name="CommentText"></textarea>
+                                <button class="comment_write_button" type="submit">게시</button>
+                        </form>
+                    </div>
                 </footer>
             </article>
             <!-- 게시글 끝 -->

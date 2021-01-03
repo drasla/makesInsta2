@@ -1,7 +1,7 @@
 import express from "express";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
-import {CountOfPosts, FindPosts, PlusPostCount, ViewPost} from "../services/boardService";
+import {CountOfPosts, FindPosts, PlusPostCount, ViewPost, WriteComment} from "../services/boardService";
 import {BoardPicUpload} from "../services/fileUpload";
 import {ErrorMsg} from "../consts/errorMessage";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
@@ -64,6 +64,28 @@ IndexRouter.get("/:id", Auth, WrapHandler(async (req, res) => {
     })
 }))
 
+IndexRouter.post("/:id/:post([0-9]{1,10})/comment", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    const boardId = req.params.post;
+
+    const commentText = req.body.CommentText;
+
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId) {
+        return res.redirect("/");
+    }
+
+    await WriteComment(targetInformation.userId, Number(boardId), "plus", commentText);
+
+    return res.redirect(`/${req.params.id}/${req.params.post}`);
+}));
+
 IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
@@ -110,6 +132,7 @@ IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) =>
         posts: posts,
     })
 }));
+
 
 IndexRouter.get("/:id/write", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {

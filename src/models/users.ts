@@ -8,12 +8,6 @@ import {Column, DataType, Model, Table} from "sequelize-typescript";
 })
 export class Users extends Model<Users> {
     @Column({
-        type: DataType.INTEGER,
-        comment: "유저 테이블 아이디"
-    })
-    id: number;
-
-    @Column({
         type: DataType.STRING(100),
         comment: "유저 아이디"
     })
