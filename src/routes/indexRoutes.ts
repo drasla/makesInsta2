@@ -1,7 +1,7 @@
 import express from "express";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
-import {CountOfPosts, FindPosts, PlusPostCount, ViewPost, WriteComment} from "../services/boardService";
+import {ChangePostCount, CountOfPosts, FindPosts, ViewComment, ViewPost, WriteComment} from "../services/boardService";
 import {BoardPicUpload} from "../services/fileUpload";
 import {ErrorMsg} from "../consts/errorMessage";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
@@ -101,6 +101,8 @@ IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) =>
 
     const posts = await ViewPost(req.params.id, Number(req.params.post));
 
+    const comments = await ViewComment(req.params.id, Number(req.params.post));
+
     if (!posts.isPost) {
         return res.render("board/error", {
             myinfo: {
@@ -130,6 +132,7 @@ IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) =>
             picture: targetInformation.picture
         },
         posts: posts,
+        comments: comments
     })
 }));
 
@@ -206,7 +209,7 @@ IndexRouter.post("/:id/write", Auth, BoardPicUpload.single("writePic"), WrapHand
             transaction: t
         });
 
-        const plus = PlusPostCount(user.id);
+        ChangePostCount(user.id, "plus");
 
         return {
             isWrite: true

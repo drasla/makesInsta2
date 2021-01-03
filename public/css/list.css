@@ -673,6 +673,14 @@ section.full_list > div.full_left > div.content > div.postList {
     width: 100%;
 }
 
+section.full_list > div.full_left > div.content > div.notPostList {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    margin: 0px auto 100px auto;
+
+}
+
 section.full_list > div.full_left > div.content > div.postList > div.third {
     flex-direction: row;
     margin-bottom: 28px;

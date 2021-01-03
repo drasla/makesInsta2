@@ -28,7 +28,9 @@
                     <div class="comment">
                         <div class="countComment">댓글 <%=posts.data.replies%>개</div>
                         <!-- 코멘트 반복 시작 -->
-                        <div class="comment_name"><span class="name">kr_jess_98</span><span class="text">헐 너무 이쁘시네요! 어디서 자르셨나요?-</span></div>
+                        <% for (comment of comments.data) { %>
+                        <div class="comment_name"><span class="name"><%=comment.userId%></span><span class="text"><%=comment.contents%></span></div>
+                        <% } %>
                         <!-- 코멘트 반복 끝 -->
                     </div>
                     <div class="time"><%=posts.data.createdAt%></div>

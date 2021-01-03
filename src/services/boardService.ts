@@ -146,14 +146,66 @@ export const ViewPost = async (username: string, boardId: number) => {
     return post;
 }
 
-export const PlusPostCount = async (userId: number) => {
+export const ViewComment = async (username: string, boardId: number) => {
+    const comment = await SequelizeUtil.db.transaction<{
+        isComment: boolean,
+        data?: object,
+        userinfo?: object,
+        msg?: string
+    }>(async t=> {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: username
+            },
+            transaction: t
+        })
+
+        if(!user) {
+            return {
+                isComment: false,
+                msg: ErrorMsg.NotFoundPosts,
+            }
+        }
+
+        const board = await BoardReplies.findAll<BoardReplies>({
+            where: {
+                boardNumber: boardId
+            },
+            order: [
+                ["createdAt", "desc"]
+            ],
+            transaction: t
+        });
+
+        if(!board) {
+            return {
+                isComment: false,
+                msg: ErrorMsg.NotFoundPosts,
+            }
+        }
+
+        return {
+            isComment: true,
+            data: board
+        }
+    })
+
+    return comment;
+}
+
+export const ChangePostCount = async (userId: number, type: string) => {
     const plus = await SequelizeUtil.db.transaction<{
         isPlus: boolean
     }>(async t => {
         const prevCount = await CountOfPosts(userId);
-        if (prevCount.count) {
+        if (prevCount.isCount) {
+            if (type === "plus") {
+                var resultCount = Number(prevCount.count) + 1;
+            } else {
+                var resultCount = Number(prevCount.count) - 1;
+            }
             await UserInfo.update({
-                    posts: prevCount.count + 1
+                    posts: resultCount
                 },
                 {
                     where: {
@@ -180,11 +232,11 @@ export const ChangeCommentCount = async (boardId: number, type: string) => {
     }>(async t => {
         const prevCount = await CountOfComments(boardId);
 
-        if (prevCount.count) {
+        if (prevCount.isCount) {
             if (type === "plus") {
-                var resultCount = prevCount.count + 1;
+                var resultCount = Number(prevCount.count) + 1;
             } else {
-                var resultCount = prevCount.count - 1;
+                var resultCount = Number(prevCount.count) - 1;
             }
 
             await Board.update({
@@ -222,7 +274,7 @@ export const WriteComment = async (targetUserId: number, boardId: number, type: 
                 transaction: t
             });
 
-        await ChangeCommentCount(boardId, type);
+        const changeCommentCount = await ChangeCommentCount(boardId, type);
 
         await comment.save({
             transaction: t
@@ -235,3 +287,5 @@ export const WriteComment = async (targetUserId: number, boardId: number, type: 
 
     return commentWrite;
 }
+
+

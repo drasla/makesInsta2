@@ -58,6 +58,11 @@
                 <% } %>
             </div>
             <!-- 게시물 줄 끝 -->
+            <% if (!posts.count) { %>
+            <div class="notPostList">
+                포스트가 없습니다.
+            </div>
+            <% } %>
         </div>
         </div>
     </div>
