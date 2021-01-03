@@ -86,6 +86,40 @@ IndexRouter.post("/:id/:post([0-9]{1,10})/comment", Auth, WrapHandler(async (req
     return res.redirect(`/${req.params.id}/${req.params.post}`);
 }));
 
+IndexRouter.get("/:id/:post([0-9]{1,10})/delete", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    const boardId = req.params.post;
+
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId || myInformation.username !== req.params.id) {
+        return res.redirect("/");
+    }
+
+    return res.render("board/delete", {
+        myinfo: {
+            username: req.userinfo.username,
+            name: myInformation.name,
+            comment: myInformation.comment,
+            email: myInformation.email,
+            picture: myInformation.picture
+        },
+        targetinfo: {
+            username: targetInformation.username,
+            name: targetInformation.name,
+            comment: targetInformation.comment,
+            email: targetInformation.email,
+            picture: targetInformation.picture
+        },
+        post: req.params.post,
+    })
+}));
+
 IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
@@ -131,6 +165,7 @@ IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) =>
             email: targetInformation.email,
             picture: targetInformation.picture
         },
+        post: req.params.post,
         posts: posts,
         comments: comments
     })

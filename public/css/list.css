@@ -286,6 +286,10 @@ div.button_like {
     margin-top: 4px;
 }
 
+div.button_delete {
+    margin-left: 10px;
+}
+
 div.upload_pic {
     align-items: stretch;
     display: flex;
@@ -1130,4 +1134,19 @@ div.full_left > div.content > article.content > footer > div.comment_write > for
     text-overflow: ellipsis;
     width: 20px;
     white-space: nowrap;
+}
+
+div.full_left > div.content > article.content > form > div.button {
+    align-items: stretch;
+    text-align: center;
+    margin: 40px auto;
+}
+
+div.full_left > div.content > article.content > form > div.button > button {
+    border: 1px solid transparent;
+    padding: 8px 14px;
+    border-radius: 5px;
+    background-color: #0095f6;
+    color: #ffffff;
+    position: relative;
 }
