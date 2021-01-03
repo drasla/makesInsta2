@@ -1,7 +1,7 @@
 import express from "express";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
-import {CountOfPosts, FindPosts, PlusPostCount} from "../services/boardService";
+import {CountOfPosts, FindPosts, PlusPostCount, ViewPost} from "../services/boardService";
 import {BoardPicUpload} from "../services/fileUpload";
 import {ErrorMsg} from "../consts/errorMessage";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
@@ -63,6 +63,53 @@ IndexRouter.get("/:id", Auth, WrapHandler(async (req, res) => {
         posts: posts,
     })
 }))
+
+IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    if (!targetInformation.isFind || !targetInformation.userId) {
+        return res.redirect("/");
+    }
+
+    const posts = await ViewPost(req.params.id, Number(req.params.post));
+
+    if (!posts.isPost) {
+        return res.render("board/error", {
+            myinfo: {
+                username: req.userinfo.username,
+                name: myInformation.name,
+                comment: myInformation.comment,
+                email: myInformation.email,
+                picture: myInformation.picture
+            },
+            Msg: posts.msg,
+        })
+    }
+
+    return res.render("board/read", {
+        myinfo: {
+            username: req.userinfo.username,
+            name: myInformation.name,
+            comment: myInformation.comment,
+            email: myInformation.email,
+            picture: myInformation.picture
+        },
+        targetinfo: {
+            username: targetInformation.username,
+            name: targetInformation.name,
+            comment: targetInformation.comment,
+            email: targetInformation.email,
+            picture: targetInformation.picture
+        },
+        posts: posts,
+    })
+}));
 
 IndexRouter.get("/:id/write", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {

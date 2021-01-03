@@ -31,6 +31,8 @@ export class SequelizeUtil {
             logging: true
         });
 
+
+
         this.db = db;
     }
 }

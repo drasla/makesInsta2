@@ -1,0 +1,22 @@
+<section class="full_list" >
+    <div class="full_left" style="padding-bottom: 60px;">
+        <div class="content">
+            <div class="edit">
+                <% if (locals.Msg) { %>
+                <h2 class="alert" style="font-size: 16px; line-height: 30px; margin-top: 20px;">
+                    <%=locals.Msg%>
+                </h2>
+                <% } %>
+            </div>
+            <div class="rightDetail">
+                <p class="redirect">3초 뒤에 이동됩니다.</p>
+                <script type='text/javascript'>
+                    <!--
+                    setTimeout("location.href='/'", 3000);
+                    //-->
+                </script>
+            </div>
+        </div>
+    </div>
+    <%- include('../include/full_right') %>
+</section>

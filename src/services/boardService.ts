@@ -2,6 +2,7 @@ import {SequelizeUtil} from "../utils/sequelize/sequelize";
 import {UserInfo} from "../models/userInfo";
 import {Board} from "../models/board";
 import {ErrorMsg} from "../consts/errorMessage";
+import {Users} from "../models/users";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -70,6 +71,57 @@ export const FindPosts = async (userId: number) => {
     })
 
     return posts;
+}
+
+export const ViewPost = async (username: string, boardId: number) => {
+    const post = await SequelizeUtil.db.transaction<{
+        isPost: boolean,
+        data?: object,
+        msg?: string
+    }>(async t=> {
+        const user = await Users.findOne<Users>({
+            where: {
+                username: username
+            },
+            transaction: t
+        })
+
+        if(!user) {
+            return {
+                isPost: false,
+                msg: ErrorMsg.NotFoundPosts,
+            }
+        }
+
+        const board = await Board.findOne<Board>({
+            where: {
+                id: boardId,
+                userId: user.id
+            },
+            include: [{
+                model: Users,
+                where: {
+                    id: user.id
+                },
+                required: true,
+            }],
+            transaction: t
+        });
+
+        if(!board) {
+            return {
+                isPost: false,
+                msg: ErrorMsg.NotFoundPosts,
+            }
+        }
+
+        return {
+            isPost: true,
+            data: board
+        }
+    })
+
+    return post;
 }
 
 export const PlusPostCount = async (userId: number) => {

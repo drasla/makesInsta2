@@ -38,10 +38,6 @@ app.use(session({
     }
 }));
 
-app.param("id", (req, res, next, id) => {
-    next();
-})
-
 app.use("/users", UserRouter);
 app.use("/", IndexRouter);
 app.use("/", InvalidRequest);
