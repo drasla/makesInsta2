@@ -4,6 +4,8 @@ import {Board} from "../models/board";
 import {ErrorMsg} from "../consts/errorMessage";
 import {Users} from "../models/users";
 import {BoardReplies} from "../models/boardReplies";
+import {BoardLikes} from "../models/boardLikes";
+import fs from "fs";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -288,4 +290,58 @@ export const WriteComment = async (targetUserId: number, boardId: number, type: 
     return commentWrite;
 }
 
+export const DeletePost = async (targetUserId: number, boardId: number) => {
+    const deletePost = await SequelizeUtil.db.transaction<{
+        isDelete: boolean,
+        boardId: number,
+        msg: string
+    }>(async t => {
+        const findBoard = await Board.findOne<Board>({
+            where: {
+                id: boardId
+            },
+            transaction: t
+        });
 
+        if (!findBoard) {
+            return {
+                isDelete: false,
+                boardId: boardId,
+                msg: ErrorMsg.NotFoundPosts
+            }
+        }
+
+        await Board.destroy({
+            where: {
+                id: boardId
+            },
+            transaction: t
+        });
+
+        await BoardReplies.destroy({
+            where: {
+                boardNumber: boardId
+            },
+            transaction: t
+        });
+
+        await BoardLikes.destroy({
+            where: {
+                boardNumber: boardId
+            },
+            transaction: t
+        })
+
+        if(findBoard.file !== "") {
+            fs.unlinkSync('public/image/boardpic/' + findBoard.file);
+        }
+
+        return {
+            isDelete: true,
+            boardId: boardId,
+            msg: "게시글 삭제가 완료되었습니다."
+        }
+    })
+
+    return deletePost;
+}

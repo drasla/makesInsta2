@@ -1,7 +1,15 @@
 import express from "express";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
-import {ChangePostCount, CountOfPosts, FindPosts, ViewComment, ViewPost, WriteComment} from "../services/boardService";
+import {
+    ChangePostCount,
+    CountOfPosts,
+    DeletePost,
+    FindPosts,
+    ViewComment,
+    ViewPost,
+    WriteComment
+} from "../services/boardService";
 import {BoardPicUpload} from "../services/fileUpload";
 import {ErrorMsg} from "../consts/errorMessage";
 import {SequelizeUtil} from "../utils/sequelize/sequelize";
@@ -118,6 +126,35 @@ IndexRouter.get("/:id/:post([0-9]{1,10})/delete", Auth, WrapHandler(async (req, 
         },
         post: req.params.post,
     })
+}));
+
+IndexRouter.post("/:id/:post([0-9]{1,10})/delete", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    const boardId = req.params.post;
+
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId || myInformation.username !== req.params.id) {
+        return res.redirect("/");
+    }
+
+    const deletePost = await DeletePost(targetInformation.userId, Number(boardId));
+
+    return res.render("board/result", {
+        myinfo: {
+            username: req.userinfo.username,
+            name: myInformation.name,
+            comment: myInformation.comment,
+            email: myInformation.email,
+            picture: myInformation.picture
+        },
+        Msg: deletePost.msg,
+    });
 }));
 
 IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) => {
