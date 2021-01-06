@@ -1,4 +1,5 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table} from "sequelize-typescript";
+import {Users} from "./users";
 
 @Table ({
     charset: 'utf8',
@@ -7,6 +8,7 @@ import {Column, DataType, Model, Table} from "sequelize-typescript";
     comment: "유저인포 테이블"
 })
 export class UserInfo extends Model<UserInfo> {
+/*    @HasOne(()=> Users, {foreignKey: "userInfoId", sourceKey: "id"})*/
     @Column({
         type: DataType.STRING(100),
         comment: "유저 이름"
@@ -25,6 +27,8 @@ export class UserInfo extends Model<UserInfo> {
     })
     email: string;
 
+/*    @BelongsTo(() => Users)
+    @ForeignKey(() => Users)*/
     @Column
     userId: number;
 
