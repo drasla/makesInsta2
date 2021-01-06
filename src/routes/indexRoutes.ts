@@ -4,7 +4,7 @@ import {WrapHandler} from "../utils/requestHandler/requestHandler";
 import {
     ChangePostCount,
     CountOfPosts,
-    DeletePost,
+    DeletePost, FindFullLists,
     FindPosts,
     ViewComment,
     ViewPost,
@@ -19,20 +19,24 @@ import {Board} from "../models/board";
 export const IndexRouter = express.Router();
 
 IndexRouter.get("/", Auth, WrapHandler(async (req, res) => {
-    if(req.userinfo) {
-        const userInformation = await FindUserInfo(req.userinfo.username);
-        res.render("board/full_list", {
-            myinfo: {
-                username: req.userinfo.username,
-                name: userInformation.name,
-                comment: userInformation.comment,
-                email: userInformation.email,
-                picture: userInformation.picture
-            },
-        })
-    } else {
+    if(!req.userinfo) {
         res.render("index", { layout: false });
     }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const posts: object = await FindFullLists();
+
+    return res.render("board/full_list", {
+        myinfo: {
+            username: req.userinfo.username,
+            name: myInformation.name,
+            comment: myInformation.comment,
+            email: myInformation.email,
+            picture: myInformation.picture
+        },
+        posts: posts,
+    })
 }));
 
 IndexRouter.get("/:id", Auth, WrapHandler(async (req, res) => {

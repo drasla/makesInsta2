@@ -60,13 +60,43 @@ export const CountOfComments = async (boardId: number) => {
     return count;
 }
 
+export const FindFullLists = async () => {
+    const posts = await SequelizeUtil.db.transaction<{
+        isPost: boolean,
+        data?: object,
+        msg?: string
+    }>(async t => {
+        const board = await Board.findAll<Board>({
+            order: [
+                ["id", "desc"]
+            ],
+            transaction: t
+        });
+
+        if(!board) {
+            return {
+                isPost: false,
+                msg: ErrorMsg.NotFoundPosts
+            };
+        }
+
+        return {
+            isPost: true,
+            data: board
+        }
+    })
+
+    return posts;
+}
+
+
 export const FindPosts = async (userId: number) => {
     const posts = await SequelizeUtil.db.transaction<{
         isPost: boolean,
         data?: object,
-        count?: number
+        count?: number,
         msg?: string
-    }>(async t=> {
+    }>(async t => {
         const board = await Board.findAll<Board>({
             where: {
                 userId: userId
