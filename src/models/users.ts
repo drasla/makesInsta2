@@ -11,22 +11,25 @@ import {BoardReplies} from "./boardReplies";
     comment: "유저 테이블"
 })
 export class Users extends Model<Users> {
-/*    @HasMany(() => UserInfo, { foreignKey: "userId", sourceKey: "id"})
-    @HasMany(() => Board, { foreignKey: "userId", sourceKey: "id"})
-    @HasMany(() => BoardLikes, { foreignKey: "userId", sourceKey: "id"})
-    @HasMany(() => BoardReplies, { foreignKey: "userId", sourceKey: "id"})*/
-
     @Column({
         type: DataType.STRING(100),
         comment: "유저 아이디"
     })
     username: string;
 
-/*    @BelongsTo(() => UserInfo)
-    @ForeignKey(() => UserInfo)*/
+    @ForeignKey(() => UserInfo)
     @Column({
         type: DataType.INTEGER,
         comment: "유저인포 테이블의 아이디"
     })
     userInfoId: number;
+
+    @HasMany(() => UserInfo)
+    @Column({
+        type: DataType.INTEGER,
+        comment: "유저 인덱스 아이디",
+        primaryKey: true,
+        autoIncrement: true
+    })
+    id: number;
 }

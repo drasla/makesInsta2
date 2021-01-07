@@ -11,8 +11,6 @@ import {Users} from "./users";
     comment: "게시물 테이블"
 })
 export class Board extends Model<Board> {
-/*    @HasMany(() => BoardReplies, { foreignKey: "BoardNumber", sourceKey: "id"})
-    @HasMany(() => BoardLikes, { foreignKey: "BoardNumber", sourceKey: "id"})*/
     @Column({
         type:DataType.TEXT,
         comment: "내용"
@@ -37,8 +35,7 @@ export class Board extends Model<Board> {
     })
     replies: number;
 
-/*    @BelongsTo(() => Users)
-    @ForeignKey(() => Users)*/
+    @ForeignKey(() => Users)
     @Column({
         type: DataType.INTEGER,
         comment: "유저 테이블의 인덱스"
