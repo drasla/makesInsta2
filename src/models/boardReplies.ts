@@ -9,16 +9,12 @@ import {Board} from "./board";
     comment: "게시물 테이블"
 })
 export class BoardReplies extends Model<BoardReplies> {
-/*    @BelongsTo(() => Board)
-    @ForeignKey(() => Board)*/
     @Column({
         type: DataType.INTEGER,
         comment: "게시글 번호"
     })
     boardNumber: number;
 
-/*    @BelongsTo(() => Users)
-    @ForeignKey(() => Users)*/
     @Column({
         type: DataType.INTEGER,
         comment: "댓글을 단 유저 테이블의 인덱스"

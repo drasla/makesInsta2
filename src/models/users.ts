@@ -25,6 +25,7 @@ export class Users extends Model<Users> {
     userInfoId: number;
 
     @HasMany(() => UserInfo)
+    @HasMany(() => Board)
     @Column({
         type: DataType.INTEGER,
         comment: "유저 인덱스 아이디",
