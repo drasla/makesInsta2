@@ -6,7 +6,6 @@ import {Users} from "../models/users";
 import {BoardReplies} from "../models/boardReplies";
 import {BoardLikes} from "../models/boardLikes";
 import fs from "fs";
-import {HasOne} from "sequelize";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -263,8 +262,10 @@ export const ChangePostCount = async (userId: number, type: string) => {
         if (prevCount.isCount) {
             if (type === "plus") {
                 var resultCount = Number(prevCount.count) + 1;
-            } else {
+            } else if(type === "minus") {
                 var resultCount = Number(prevCount.count) - 1;
+            } else {
+                var resultCount = Number(prevCount.count);
             }
             await UserInfo.update({
                     posts: resultCount
@@ -336,7 +337,22 @@ export const WriteComment = async (targetUserId: number, boardId: number, type: 
                 transaction: t
             });
 
-        const changeCommentCount = await ChangeCommentCount(boardId, type);
+        //await ChangeCommentCount(boardId, type);
+        const prevCount = await CountOfComments(boardId);
+
+        if (prevCount.isCount) {
+            var resultCount = Number(prevCount.count) + 1;
+
+            await Board.update({
+                    replies: resultCount
+                },
+                {
+                    where: {
+                        id: boardId
+                    },
+                    transaction: t
+                });
+        }
 
         await comment.save({
             transaction: t
@@ -394,6 +410,22 @@ export const DeletePost = async (targetUserId: number, boardId: number) => {
 
         if(findBoard.file !== "") {
             fs.unlinkSync('public/image/boardpic/' + findBoard.file);
+        }
+
+        const prevCount = await CountOfPosts(targetUserId);
+        if (prevCount.isCount) {
+
+            var resultCount = Number(prevCount.count) - 1;
+
+            await UserInfo.update({
+                    posts: resultCount
+                },
+                {
+                    where: {
+                        userId: targetUserId
+                    },
+                    transaction: t
+                });
         }
 
         return {
