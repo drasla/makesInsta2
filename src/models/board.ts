@@ -1,7 +1,4 @@
-import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
-import {UserInfo} from "./userInfo";
-import {BoardReplies} from "./boardReplies";
-import {BoardLikes} from "./boardLikes";
+import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
 import {Users} from "./users";
 
 @Table ({
@@ -41,4 +38,7 @@ export class Board extends Model<Board> {
         comment: "유저 테이블의 인덱스"
     })
     userId: number;
+
+    @BelongsTo(() => Users)
+    user: Users;
 }

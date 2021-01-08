@@ -1,18 +1,15 @@
 /*
-import {Table, Column, Model, DataType, ForeignKey, BelongsTo, HasOne} from 'sequelize-typescript';
+import {Table, Column, Model, DataType, ForeignKey, HasOne, BelongsTo, HasMany} from 'sequelize-typescript';
+import {Op} from "sequelize";
 
 @Table({
     timestamps: true,
     tableName: 'app_user',
-    comment: "유저 테이블",
+    comment: "user",
     underscored: true
 })
 export class User extends Model<User> {
-    @Column({
-        type: DataType.STRING(500),
-        allowNull: false,
-        comment: '이메일'
-    })
+    @Column
     email: string;
 
     @ForeignKey(() => UserInfo)
@@ -21,20 +18,20 @@ export class User extends Model<User> {
 
     @BelongsTo(() => UserInfo)
     userInfo: UserInfo;
+
+    @HasMany(() => Board)
+    board: Board[]
 }
+
 
 @Table({
     timestamps: true,
     tableName: 'app_user_info',
-    comment: "유저 테이블",
+    comment: "user_info",
     underscored: true
 })
 export class UserInfo extends Model<UserInfo> {
-    @Column({
-        type: DataType.STRING(50),
-        allowNull: false,
-        comment: '이름'
-    })
+    @Column
     nm: string;
 
     @HasOne(() => User)
@@ -42,27 +39,67 @@ export class UserInfo extends Model<UserInfo> {
 }
 
 
+@Table
+export class Board extends Model<Board> {
+    @Column
+    contents: string
+
+    @HasMany(() => Reply, 'boardId')
+    reply: Reply[];
+
+    @ForeignKey(() => User)
+    @Column
+    userId: number;
+
+    @BelongsTo(() => User)
+    user: User;
+}
 
 
-const sampleCode = async () => {
-    // 데이터 생성
-    const userInfo = await UserInfo.create({
-        nm: 'ciao',
-        user: {
-            email: 'ciaolee87@gmail.com'
-        }
-    }, {
-        // 같이 생성할 테이블 객체
-        include: [User]
+const a = async () => {
+    const boardList = await Board.findAll({
+        where: {
+            createdAt: {
+                [Op.lt]: new Date()
+            }
+        },
+        include: [User, Reply],
     });
 
 
-    // 입력값 검색
-    const user = await User.findOne({
-        where: {
-            email: 'ciaolee87@gmail.com'
-        },
-        include: [UserInfo]
+    Board.create({
+        contents: 'aaaa',
+        user: await User.findOne({
+            where: {
+                id: 1
+            }
+        }),
+        reply: [
+            {reply: 'abcd'}
+        ]
+    }, {
+        include: [User]
     })
+
 }
- */
+
+@Table
+export class Reply extends Model<Reply> {
+    @Column
+    reply: string;
+
+    @ForeignKey(() => Board)
+    @Column
+    boardId: number;
+
+    @ForeignKey(() => User)
+    @Column
+    userId: number;
+
+    @BelongsTo(() => Board)
+    board: Board;
+
+    @BelongsTo(() => User)
+    user: User;
+}
+*/

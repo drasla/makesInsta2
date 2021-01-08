@@ -1,5 +1,4 @@
-import {BelongsTo, Column, DataType, ForeignKey, HasOne, Model, Table} from "sequelize-typescript";
-import {Users} from "./users";
+import {Column, DataType, Model, Table} from "sequelize-typescript";
 
 @Table ({
     charset: 'utf8',
@@ -8,15 +7,6 @@ import {Users} from "./users";
     comment: "유저인포 테이블"
 })
 export class UserInfo extends Model<UserInfo> {
-    @HasOne(()=> Users, {foreignKey: "userInfoId", sourceKey: "id"})
-    @Column({
-        type: DataType.INTEGER,
-        comment: "유저 정보 인덱스 아이디",
-        primaryKey: true,
-        autoIncrement: true
-    })
-    id: number;
-
     @Column({
         type: DataType.STRING(100),
         comment: "유저 이름"
@@ -35,7 +25,6 @@ export class UserInfo extends Model<UserInfo> {
     })
     email: string;
 
-    @ForeignKey(() => Users)
     @Column
     userId: number;
 

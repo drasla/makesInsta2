@@ -6,6 +6,7 @@ import {Users} from "../models/users";
 import {BoardReplies} from "../models/boardReplies";
 import {BoardLikes} from "../models/boardLikes";
 import fs from "fs";
+import {HasOne} from "sequelize";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -70,6 +71,9 @@ export const FindFullLists = async () => {
             order: [
                 ["id", "desc"]
             ],
+            include: [{
+               model: Users
+            }],
             transaction: t
         });
 
