@@ -235,6 +235,11 @@ export const ViewComment = async (username: string, boardId: number) => {
             order: [
                 ["createdAt", "desc"]
             ],
+            include: [
+                {
+                    model: Users
+                }
+            ],
             transaction: t
         });
 

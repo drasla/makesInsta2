@@ -32,7 +32,7 @@
                         <div class="countComment">댓글 <%=posts.data.replies%>개</div>
                         <!-- 코멘트 반복 시작 -->
                         <% for (comment of comments.data) { %>
-                        <div class="comment_name"><span class="name"><%=comment.userId%></span><span class="text"><%=comment.contents%></span></div>
+                        <div class="comment_name"><span class="name"><%=comment.user.username%></span><span class="text"><%=comment.contents%></span></div>
                         <% } %>
                         <!-- 코멘트 반복 끝 -->
                     </div>
