@@ -68,12 +68,23 @@ export const FindFullLists = async () => {
         msg?: string
     }>(async t => {
         const board = await Board.findAll<Board>({
+            subQuery: false,
             order: [
                 ["id", "desc"]
             ],
-            include: [{
-               model: Users
-            }],
+            include: [
+                {
+                    model: Users
+                },
+                {
+                    model: BoardReplies,
+                    include: [{model: Users}],
+                    order: [
+                        ["createdAt", "desc"]
+                    ],
+                    limit: 2,
+                }
+            ],
             transaction: t
         });
 

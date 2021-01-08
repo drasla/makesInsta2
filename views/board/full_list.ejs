@@ -27,11 +27,10 @@
                             <div class="uploader_name"><span class="name"><%=post.user.username%></span><span class="text"><%=post.contents%></span></div>
                         </div>
                         <div class="comment">
-                            <div class="countComment">댓글 <%=post.replies%>개 모두 보기</div>
-<!--                            &lt;!&ndash; 코멘트 반복 시작 &ndash;&gt;-->
-<!--                            <div class="comment_name"><span class="name">kr_jess_98</span><span class="text">헐 너무 이쁘시네요! 어디서 자르셨나요?-</span></div>-->
-<!--                            <div class="comment_name"><span class="name">zxcvnzc9448</span><span class="text">그냥 집 앞 미용실이여</span></div>-->
-<!--                            &lt;!&ndash; 코멘트 반복 끝 &ndash;&gt;-->
+                            <div class="countComment"><a href="/<%=post.user.username%>/<%=post.id%>" target="_self">댓글 <%=post.replies%>개 모두 보기</a></div>
+                                <% for (let reply of post.boardReplies) { %>
+                                <div class="comment_name"><span class="name"><a href="/<%=reply.user.username%>" target="_self"><%=reply.user.username%></a></span><span class="text"><%=reply.contents%></span></div>
+                                <% } %>
                         </div>
                         <div class="time"><%=post.createdAt%></div>
                     </footer>

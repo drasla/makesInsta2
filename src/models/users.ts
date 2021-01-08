@@ -1,5 +1,6 @@
 import { Column, DataType, HasMany, Model, Table} from "sequelize-typescript";
 import { Board } from "./board";
+import {BoardReplies} from "./boardReplies";
 
 @Table ({
     charset: 'utf8',
@@ -21,5 +22,8 @@ export class Users extends Model<Users> {
     userInfoId: number;
 
     @HasMany(() => Board)
-    board: Board[]
+    board: Board[];
+
+    @HasMany(() => BoardReplies)
+    boardReplies: BoardReplies[];
 }
