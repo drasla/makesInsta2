@@ -50,6 +50,14 @@ UserRouter.post("/login", Auth, WrapHandler(async (req, res) => {
             where: {
                 username: username
             },
+            include: [
+                {
+                    model: UserInfo,
+                    where: {
+                      pw: password
+                    },
+                }
+            ],
             transaction: t
         });
 
@@ -60,22 +68,7 @@ UserRouter.post("/login", Auth, WrapHandler(async (req, res) => {
             }
         }
 
-        const userInfo = await UserInfo.findOne<UserInfo>({
-            where: {
-                userId: user.userInfoId,
-                pw: password
-            },
-            transaction: t
-        });
-
-        if (!userInfo) {
-            return {
-                isLogin: false,
-                msg: ErrorMsg.PasswordNotCorrect
-            };
-        }
-
-        const token = CreateToken(user.id, username, userInfo.nm);
+        const token = CreateToken(user.id, user.username, user.userinfo.nm);
 
         res.cookie(CookieID, token.token, {
             expires: token.time
@@ -165,7 +158,6 @@ UserRouter.post("/join", WrapHandler(async (req, res) => {
                 transaction: t
             }
         );
-        user.userInfoId = userInfo.id;
 
         await user.save({
             transaction: t
@@ -291,7 +283,7 @@ UserRouter.post("/edit", Auth, WrapHandler(async (req, res) => {
             },
             {
                 where: {
-                    userId: user.userInfoId
+                    userId: user.id
                 },
                 transaction: t
             });
@@ -378,7 +370,7 @@ UserRouter.post("/edit/picture/change", Auth, UserpicUpload.single("changePic"),
             },
             {
                 where: {
-                    userId: user.userInfoId
+                    userId: user.id
                 },
                 transaction: t
             });
@@ -464,7 +456,7 @@ UserRouter.post("/edit/picture/delete", Auth, WrapHandler(async (req, res) => {
             },
             {
                 where: {
-                    userId: user.userInfoId
+                    userId: user.id
                 },
                 transaction: t
             });
@@ -551,7 +543,7 @@ UserRouter.post("/edit/password", Auth, WrapHandler(async (req, res) => {
 
         const userInfo = await UserInfo.findOne<UserInfo>({
             where: {
-                userId: user.userInfoId
+                userId: user.id
             },
             transaction: t
         });
@@ -575,7 +567,7 @@ UserRouter.post("/edit/password", Auth, WrapHandler(async (req, res) => {
             },
             {
                 where: {
-                    userId: user.userInfoId
+                    userId: user.id
                 },
                 transaction: t
             });

@@ -1,6 +1,7 @@
-import { Column, DataType, HasMany, Model, Table} from "sequelize-typescript";
+import { Column, DataType, HasMany, HasOne, Model, Table} from "sequelize-typescript";
 import { Board } from "./board";
 import {BoardReplies} from "./boardReplies";
+import {UserInfo} from "./userInfo";
 
 @Table ({
     charset: 'utf8',
@@ -15,11 +16,8 @@ export class Users extends Model<Users> {
     })
     username: string;
 
-    @Column({
-        type: DataType.INTEGER,
-        comment: "유저인포 테이블의 아이디"
-    })
-    userInfoId: number;
+    @HasOne(() => UserInfo)
+    userinfo: UserInfo;
 
     @HasMany(() => Board)
     board: Board[];

@@ -74,11 +74,26 @@ export const FindFullLists = async () => {
             ],
             include: [
                 {
-                    model: Users
+                    model: Users,
+                    include: [
+                        {
+                            model: UserInfo
+                        }
+                    ],
                 },
                 {
                     model: BoardReplies,
-                    include: [{model: Users}],
+                    subQuery: false,
+                    include: [
+                        {
+                            model: Users,
+                            include: [
+                                {
+                                    model: UserInfo
+                                }
+                            ],
+                        }
+                    ],
                     order: [
                         ["createdAt", "desc"]
                     ],

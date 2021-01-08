@@ -7,7 +7,7 @@
                     <header>
                         <div class="uploader_pic">
                             <div class="uploader_button" role="button" aria-disabled="true" style="width: 32px; height: 32px;">
-                                <a href="/" target="_self"><img class="_6q-tv" data-testid="user-avatar" draggable="false" src="https://scontent-ssn1-1.cdninstagram.com/v/t51.2885-19/s150x150/131903952_2229846113817129_1220550579437011206_n.jpg?_nc_ht=scontent-ssn1-1.cdninstagram.com&amp;_nc_ohc=UXOi2mwooOAAX_QHwlj&amp;tp=1&amp;oh=c2a5c2794ebe418eade86fc65fe713e0&amp;oe=60141D4D"></a>
+                                <a href="/<%=post.user.username%>" target="_self"><img class="_6q-tv" data-testid="user-avatar" draggable="false" src="/image/userpic/<%=post.user.userinfo.picture%>"></a>
                             </div>
                         </div>
                         <div class="uploader_name"><a href="/<%=post.user.username%>" class="uploader_name"><%=post.user.username%></a></div>

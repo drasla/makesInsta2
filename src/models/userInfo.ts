@@ -1,4 +1,5 @@
-import {Column, DataType, Model, Table} from "sequelize-typescript";
+import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
+import {Users} from "./users";
 
 @Table ({
     charset: 'utf8',
@@ -25,8 +26,12 @@ export class UserInfo extends Model<UserInfo> {
     })
     email: string;
 
+    @ForeignKey(() => Users)
     @Column
     userId: number;
+
+    @BelongsTo(() => Users)
+    user: Users;
 
     @Column({
         type:DataType.TEXT,

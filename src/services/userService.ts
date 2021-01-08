@@ -74,7 +74,7 @@ export const FindUserInfo = async (username: string) => {
 
         const userInfo = await UserInfo.findOne<UserInfo>({
             where: {
-                userId: user.userInfoId
+                userId: user.id
             },
             transaction: t
         });
