@@ -418,13 +418,13 @@ export const ChangeCommentCount = async (boardId: number, type: string) => {
     return plus;
 }
 
-export const WriteComment = async (targetUserId: number, boardId: number, type: string, contents?: string) => {
+export const WriteComment = async (userId: number, boardId: number, type: string, contents?: string) => {
     const commentWrite = await SequelizeUtil.db.transaction<{
         isWrite: boolean
     }>(async t => {
         const comment = await BoardReplies.create({
             boardNumber: boardId,
-            userId: targetUserId,
+            userId: userId,
             contents: contents,
             },
             {

@@ -93,7 +93,7 @@ IndexRouter.post("/:id/:post([0-9]{1,10})/comment", Auth, WrapHandler(async (req
         return res.redirect("/");
     }
 
-    await WriteComment(targetInformation.userId, Number(boardId), "plus", commentText);
+    await WriteComment(Number(myInformation.userId), Number(boardId), "plus", commentText);
 
     return res.redirect(`/${req.params.id}/${req.params.post}`);
 }));

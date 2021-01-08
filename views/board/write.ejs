@@ -6,7 +6,11 @@
                 <header>
                     <div class="uploaderPic">
                         <div class="uploader_button" role="button" aria-disabled="true" style="width: 32px; height: 32px;">
+                            <% if(myinfo.picture) { %>
                             <a href="/" target="_self"><img class="_6q-tv" data-testid="user-avatar" draggable="false" src="/image/userpic/<%=myinfo.picture%>"></a>
+                            <% } else { %>
+                            <a href="/" target="_self"><img class="_6q-tv" data-testid="user-avatar" draggable="false" src="/image/userpic/nopic.jpg"></a>
+                            <% } %>
                         </div>
                     </div>
                     <div class="uploader_name"><%=myinfo.username%></div>
