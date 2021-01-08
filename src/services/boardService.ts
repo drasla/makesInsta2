@@ -60,7 +60,7 @@ export const CountOfComments = async (boardId: number) => {
     return count;
 }
 
-export const FindFullLists = async () => {
+export const FindFullLists = async (userId: number) => {
     const posts = await SequelizeUtil.db.transaction<{
         isPost: boolean,
         data?: object,
@@ -129,7 +129,7 @@ export const FindFullLists = async () => {
 
         return {
             isPost: true,
-            data: board
+            data: board,
         }
     })
 
@@ -179,6 +179,32 @@ export const FindPosts = async (userId: number) => {
     return posts;
 }
 
+export const FindMyLike = async (userId: number, boardId: number) => {
+    const findMyLike = await SequelizeUtil.db.transaction<{
+        isFind: boolean
+    }>(async t => {
+        const boardLike = await BoardLikes.findOne<BoardLikes>({
+            where: {
+                userId: userId,
+                boardNumber: boardId
+            },
+            transaction: t
+        })
+
+        if (boardLike) {
+            return {
+                isFind: true
+            }
+        } else {
+            return {
+                isFind: false
+            }
+        }
+    })
+
+    return findMyLike;
+}
+
 export const ViewPost = async (username: string, boardId: number) => {
     const post = await SequelizeUtil.db.transaction<{
         isPost: boolean,
@@ -205,6 +231,51 @@ export const ViewPost = async (username: string, boardId: number) => {
                 id: boardId,
                 userId: user.id
             },
+            include: [
+                {
+                    model: Users,
+                    include: [
+                        {
+                            model: UserInfo
+                        }
+                    ],
+                },
+                {
+                    model: BoardReplies,
+                    subQuery: false,
+                    include: [
+                        {
+                            model: Users,
+                            include: [
+                                {
+                                    model: UserInfo
+                                }
+                            ],
+                        }
+                    ],
+                    order: [
+                        ["createdAt", "desc"]
+                    ],
+                },
+                {
+                    model: BoardLikes,
+                    subQuery: false,
+                    limit: 1,
+                    order: [
+                        ["createdAt", "desc"]
+                    ],
+                    include: [
+                        {
+                            model: Users,
+                            include: [
+                                {
+                                    model: UserInfo
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
             transaction: t
         });
 

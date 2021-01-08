@@ -4,7 +4,7 @@ import {WrapHandler} from "../utils/requestHandler/requestHandler";
 import {
     ChangePostCount,
     CountOfPosts,
-    DeletePost, FindFullLists,
+    DeletePost, FindFullLists, FindMyLike,
     FindPosts,
     ViewComment,
     ViewPost,
@@ -25,7 +25,7 @@ IndexRouter.get("/", Auth, WrapHandler(async (req, res) => {
 
     const myInformation = await FindUserInfo(req.userinfo.username);
 
-    const posts: object = await FindFullLists();
+    const posts = await FindFullLists(Number(myInformation.userId));
 
     return res.render("board/full_list", {
         myinfo: {
@@ -160,6 +160,30 @@ IndexRouter.post("/:id/:post([0-9]{1,10})/delete", Auth, WrapHandler(async (req,
         Msg: deletePost.msg,
     });
 }));
+
+IndexRouter.get("/:id/:post([0-9]{1,10})/findMyLike", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    const boardId = req.params.post;
+
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId || myInformation.username !== req.params.id) {
+        return res.redirect("/");
+    }
+
+    const findMyLike = await FindMyLike(Number(myInformation.userId), Number(boardId));
+
+    return res.json({
+        data: findMyLike
+    });
+}));
+
+
 
 IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
