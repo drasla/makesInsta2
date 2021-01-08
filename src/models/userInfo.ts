@@ -1,5 +1,5 @@
 import {BelongsTo, Column, DataType, ForeignKey, Model, Table} from "sequelize-typescript";
-import {Users} from "./users";
+import { Users } from "./users";
 
 @Table ({
     charset: 'utf8',
