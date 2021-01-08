@@ -2,6 +2,7 @@ import { Column, DataType, HasMany, HasOne, Model, Table} from "sequelize-typesc
 import { Board } from "./board";
 import {BoardReplies} from "./boardReplies";
 import {UserInfo} from "./userInfo";
+import {BoardLikes} from "./boardLikes";
 
 @Table ({
     charset: 'utf8',
@@ -24,4 +25,7 @@ export class Users extends Model<Users> {
 
     @HasMany(() => BoardReplies)
     boardReplies: BoardReplies[];
+
+    @HasMany(() => BoardLikes)
+    boardLikes: BoardLikes[];
 }

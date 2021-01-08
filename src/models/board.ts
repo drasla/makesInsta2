@@ -1,6 +1,7 @@
 import {BelongsTo, Column, DataType, ForeignKey, HasMany, Model, Table} from "sequelize-typescript";
 import {Users} from "./users";
 import {BoardReplies} from "./boardReplies";
+import {BoardLikes} from "./boardLikes";
 
 @Table ({
     charset: 'utf8',
@@ -11,6 +12,9 @@ import {BoardReplies} from "./boardReplies";
 export class Board extends Model<Board> {
     @HasMany(() => BoardReplies)
     boardReplies: BoardReplies[];
+
+    @HasMany(() => BoardLikes)
+    boardLikes: BoardLikes[];
 
     @Column({
         type:DataType.TEXT,

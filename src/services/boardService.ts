@@ -97,6 +97,24 @@ export const FindFullLists = async () => {
                         ["createdAt", "desc"]
                     ],
                     limit: 2,
+                },
+                {
+                    model: BoardLikes,
+                    subQuery: false,
+                    limit: 1,
+                    order: [
+                        ["createdAt", "desc"]
+                    ],
+                    include: [
+                        {
+                            model: Users,
+                            include: [
+                                {
+                                    model: UserInfo
+                                }
+                            ]
+                        }
+                    ]
                 }
             ],
             transaction: t
