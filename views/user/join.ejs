@@ -31,9 +31,14 @@
                                 <div class="inputbox">
                                     <label class="label">
                                         <span class="span">사용자명</span>
+                                        <script>
+                                            function onlyAlphabet(ele) {
+                                                ele.value = ele.value.replace(/[^\\!-z]/gi,"");
+                                            }
+                                        </script>
                                         <input aria-label="사용자명" aria-required="true"
                                                autocapitalize="off" autocorrect="off" maxlength="75" name="username"
-                                               type="text" class="inputtag" value="">
+                                               type="text" class="inputtag" value="" onkeydown="onlyAlphabet(this)">
                                     </label>
                                 </div>
                             </div>

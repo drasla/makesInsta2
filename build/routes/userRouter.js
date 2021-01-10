@@ -40,7 +40,7 @@ exports.UserRouter.get("/login", userService_1.Auth, (req, res) => {
         res.render("index", { layout: false });
     }
 });
-exports.UserRouter.post("/login", requestHandler_1.WrapHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.UserRouter.post("/login", userService_1.Auth, requestHandler_1.WrapHandler((req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password } = req.body;
     if (!username || !password) {
         return res.render("index", { "Msg": errorMessage_1.ErrorMsg.NotInputValue, layout: false });
