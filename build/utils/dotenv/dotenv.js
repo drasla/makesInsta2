@@ -42,7 +42,6 @@ class DotEnv {
     static load(filePath) {
         if (!fs_1.default.existsSync(filePath)) {
             console.log(`not found env file. ${filePath}`);
-            process.exit(0);
         }
         const env = dotenv_1.default.config({
             path: filePath,
