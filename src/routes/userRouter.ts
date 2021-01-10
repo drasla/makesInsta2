@@ -27,7 +27,7 @@ UserRouter.get("/login", Auth, (req, res) => {
     }
 });
 
-UserRouter.post("/login", Auth, WrapHandler(async (req, res) => {
+UserRouter.post("/login", WrapHandler(async (req, res) => {
     const {username, password} = req.body;
 
     if (!username || !password) {
