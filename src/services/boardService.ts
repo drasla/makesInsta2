@@ -211,6 +211,8 @@ export const FindPosts = async (userId: number) => {
     return posts;
 }
 
+// AJAX를 위해서 썼으나 아직 이용 불가
+/*
 export const FindMyLike = async (userId: number, boardId: number) => {
     const findMyLike = await SequelizeUtil.db.transaction<{
         isFind: boolean
@@ -236,8 +238,9 @@ export const FindMyLike = async (userId: number, boardId: number) => {
 
     return findMyLike;
 }
+ */
 
-export const ViewPost = async (username: string, boardId: number) => {
+export const ViewPost = async (username: string, boardId: number, myUserId: number) => {
     const post = await SequelizeUtil.db.transaction<{
         isPost: boolean,
         data?: object,
@@ -262,6 +265,11 @@ export const ViewPost = async (username: string, boardId: number) => {
             where: {
                 id: boardId,
                 userId: user.id
+            },
+            attributes: {
+                include: [
+                    [Sequelize.literal(`(SELECT COUNT(id) from BoardLikes where boardNumber = Board.id AND userId=${myUserId})`), "myLike"]
+                ]
             },
             include: [
                 {

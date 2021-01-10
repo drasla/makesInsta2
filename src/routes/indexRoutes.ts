@@ -218,7 +218,7 @@ IndexRouter.get("/:id/:post([0-9]{1,10})", Auth, WrapHandler(async (req, res) =>
         return res.redirect("/");
     }
 
-    const posts = await ViewPost(req.params.id, Number(req.params.post));
+    const posts = await ViewPost(req.params.id, Number(req.params.post), Number(myInformation.userId));
 
     const comments = await ViewComment(req.params.id, Number(req.params.post));
 
