@@ -22,7 +22,7 @@ export class DotEnv {
     private static load(filePath: string): void {
         if (!fs.existsSync(filePath)) {
             console.log(`not found env file. ${filePath}`);
-            process.exit(0);
+        //    process.exit(0);
         }
 
         const env = dotEnv.config({
