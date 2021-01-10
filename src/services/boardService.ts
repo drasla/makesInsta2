@@ -61,6 +61,32 @@ export const CountOfComments = async (boardId: number) => {
     return count;
 }
 
+export const CountOfLikes = async (boardId: number) => {
+    const count = await SequelizeUtil.db.transaction<{
+        isCount: boolean,
+        count?: number
+    }>(async t => {
+        const board = await Board.findOne<Board>({
+            where: {
+                id: boardId
+            },
+            transaction: t
+        });
+
+        if (!board) {
+            return {
+                isCount: false
+            }
+        } else {
+            return {
+                isCount: true,
+                count: board.likes
+            }
+        }
+    })
+    return count;
+}
+
 export const FindFullLists = async (userId: number) => {
     const posts = await SequelizeUtil.db.transaction<{
         isPost: boolean,
@@ -424,6 +450,41 @@ export const ChangeCommentCount = async (boardId: number, type: string) => {
     return plus;
 }
 
+export const ChangeLikesCount = async (boardId: number, type: string) => {
+    const plus = await SequelizeUtil.db.transaction<{
+        isPlus: boolean
+    }>(async t => {
+        const prevCount = await CountOfLikes(boardId);
+
+        if (prevCount.isCount) {
+            if (type === "plus") {
+                var resultCount = Number(prevCount.count) + 1;
+            } else {
+                var resultCount = Number(prevCount.count) - 1;
+            }
+
+            await Board.update({
+                    likes: resultCount
+                },
+                {
+                    where: {
+                        id: boardId
+                    },
+                    transaction: t
+                });
+
+            return {
+                isPlus: true
+            }
+        } else {
+            return {
+                isPlus: false
+            }
+        }
+    })
+    return plus;
+}
+
 export const WriteComment = async (userId: number, boardId: number, type: string, contents?: string) => {
     const commentWrite = await SequelizeUtil.db.transaction<{
         isWrite: boolean
@@ -536,4 +597,80 @@ export const DeletePost = async (targetUserId: number, boardId: number) => {
     })
 
     return deletePost;
+}
+
+export const AddMyLikes = async(userId: number, boardId: number) => {
+    const addLikes = await SequelizeUtil.db.transaction<{
+        isAdd: boolean
+    }>(async t => {
+        const like = await BoardLikes.create({
+                boardNumber: boardId,
+                userId: userId,
+            },
+            {
+                transaction: t
+            });
+
+        const prevCount = await CountOfLikes(boardId);
+        if (prevCount.isCount) {
+
+            var resultCount = Number(prevCount.count) + 1;
+
+            await Board.update({
+                    likes: resultCount
+                },
+                {
+                    where: {
+                        id: boardId
+                    },
+                    transaction: t
+                });
+        }
+
+        await like.save({
+            transaction: t
+        });
+
+        return {
+            isAdd: true
+        };
+    });
+
+    return addLikes;
+}
+
+export const RemoveMyLikes = async(userId: number, boardId: number) => {
+    const removeLikes = await SequelizeUtil.db.transaction<{
+        isRemove: boolean
+    }>(async t => {
+        await BoardLikes.destroy({
+            where: {
+                boardNumber: boardId,
+                userId: userId,
+            },
+            transaction: t
+        });
+
+        const prevCount = await CountOfLikes(boardId);
+        if (prevCount.isCount) {
+
+            var resultCount = Number(prevCount.count) - 1;
+
+            await Board.update({
+                    likes: resultCount
+                },
+                {
+                    where: {
+                        id: boardId
+                    },
+                    transaction: t
+                });
+        }
+
+        return {
+            isRemove: true
+        };
+    });
+
+    return removeLikes;
 }

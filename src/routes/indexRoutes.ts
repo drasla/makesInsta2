@@ -2,10 +2,12 @@ import express from "express";
 import {Auth, FindUserInfo} from "../services/userService";
 import {WrapHandler} from "../utils/requestHandler/requestHandler";
 import {
+    AddMyLikes,
     ChangePostCount,
     CountOfPosts,
-    DeletePost, FindFullLists, FindMyLike,
+    DeletePost, FindFullLists,
     FindPosts,
+    RemoveMyLikes,
     ViewComment,
     ViewPost,
     WriteComment
@@ -161,7 +163,7 @@ IndexRouter.post("/:id/:post([0-9]{1,10})/delete", Auth, WrapHandler(async (req,
     });
 }));
 
-IndexRouter.get("/:id/:post([0-9]{1,10})/findMyLike", Auth, WrapHandler(async (req, res) => {
+IndexRouter.get("/:id/:post([0-9]{1,10})/addMyLike", Auth, WrapHandler(async (req, res) => {
     if(!req.userinfo) {
         return res.redirect("/");
     }
@@ -172,15 +174,33 @@ IndexRouter.get("/:id/:post([0-9]{1,10})/findMyLike", Auth, WrapHandler(async (r
 
     const boardId = req.params.post;
 
-    if (!targetInformation.isFind || !targetInformation.userId || !boardId || myInformation.username !== req.params.id) {
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId) {
         return res.redirect("/");
     }
 
-    const findMyLike = await FindMyLike(Number(myInformation.userId), Number(boardId));
+    await AddMyLikes(Number(myInformation.userId), Number(boardId));
 
-    return res.json({
-        data: findMyLike
-    });
+    res.redirect(`/${req.params.id}/${req.params.post}`);
+}));
+
+IndexRouter.get("/:id/:post([0-9]{1,10})/removeMyLike", Auth, WrapHandler(async (req, res) => {
+    if(!req.userinfo) {
+        return res.redirect("/");
+    }
+
+    const myInformation = await FindUserInfo(req.userinfo.username);
+
+    const targetInformation = await FindUserInfo(req.params.id);
+
+    const boardId = req.params.post;
+
+    if (!targetInformation.isFind || !targetInformation.userId || !boardId) {
+        return res.redirect("/");
+    }
+
+    await RemoveMyLikes(Number(myInformation.userId), Number(boardId));
+
+    res.redirect(`/${req.params.id}/${req.params.post}`);
 }));
 
 
