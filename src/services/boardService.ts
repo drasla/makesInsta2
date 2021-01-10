@@ -6,6 +6,7 @@ import {Users} from "../models/users";
 import {BoardReplies} from "../models/boardReplies";
 import {BoardLikes} from "../models/boardLikes";
 import fs from "fs";
+import {Sequelize} from "sequelize-typescript";
 
 export const CountOfPosts = async (userId: number) => {
     const count = await SequelizeUtil.db.transaction<{
@@ -68,6 +69,11 @@ export const FindFullLists = async (userId: number) => {
     }>(async t => {
         const board = await Board.findAll<Board>({
             subQuery: false,
+            attributes: {
+                include: [
+                    [Sequelize.literal(`(SELECT COUNT(id) from BoardLikes where boardNumber = Board.id AND userId=${userId})`), "myLike"]
+                ]
+            },
             order: [
                 ["id", "desc"]
             ],
